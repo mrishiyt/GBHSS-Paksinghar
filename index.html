@@ -12,7 +12,7 @@
             --primary-dark: #1d4ed8;
             --accent: #38bdf8;
             --bg-dark: #020617;
-            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-bg: rgba(15, 23, 42, 0.9);
             --border-color: rgba(255, 255, 255, 0.1);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -31,42 +31,77 @@
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             overflow-x: hidden;
             position: relative;
         }
 
         .ambient-bg {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                radial-gradient(at 20% 20%, rgba(37, 99, 235, 0.25) 0px, transparent 50%),
-                radial-gradient(at 80% 80%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 20% 20%, rgba(37, 99, 235, 0.2) 0px, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
                 radial-gradient(at 50% 50%, rgba(2, 6, 23, 0.95) 0px, transparent 100%);
             z-index: -1;
         }
 
-        .glow-orb {
-            position: absolute;
-            width: 450px; height: 450px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(56, 189, 248, 0.05));
-            filter: blur(100px);
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulseOrb 8s infinite alternate ease-in-out;
+        /* Top Navigation Bar */
+        nav {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            z-index: 10;
         }
 
-        @keyframes pulseOrb {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            100% { transform: scale(1.2); opacity: 1; }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .nav-logo img {
+            width: 32px; height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
         }
 
         .wrapper {
             width: 100%;
-            max-width: 480px;
-            padding: 20px;
+            max-width: 520px;
+            padding: 10px 20px 40px;
             z-index: 1;
+            margin: auto;
         }
 
         .card-panel {
@@ -80,8 +115,8 @@
                         inset 0 1px 0 rgba(255, 255, 255, 0.15);
             display: none;
             opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .card-panel.active {
@@ -92,7 +127,7 @@
 
         .header-box {
             text-align: center;
-            margin-bottom: 26px;
+            margin-bottom: 24px;
         }
 
         .logo-frame {
@@ -116,6 +151,24 @@
         .header-box h1 { font-size: 21px; font-weight: 700; color: #fff; margin-bottom: 6px; }
         .header-box p { font-size: 13px; color: var(--text-muted); font-weight: 500; }
 
+        /* Professional Stock Banner Image */
+        .school-banner {
+            width: 100%;
+            height: 140px;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .school-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Tab Switcher */
         .tab-switcher {
             display: flex; background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
@@ -216,21 +269,71 @@
             background: rgba(255, 255, 255, 0.09); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-2px);
         }
         .btn-google-sso img { width: 18px; height: 18px; }
+
+        /* Content Pages Styling (About, Contact, Privacy) */
+        .content-body {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .content-body h3 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 8px;
+            margin-top: 16px;
+        }
+
+        .content-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            border-radius: 12px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            font-size: 13.5px;
+        }
+
+        .info-card i {
+            color: var(--accent);
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
     <div class="ambient-bg"></div>
-    <div class="glow-orb"></div>
+
+    <!-- Navigation Header -->
+    <nav>
+        <div class="nav-logo" onclick="switchPage('authPanel', document.querySelector('.nav-btn'))">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Logo">
+            <span>GBHSS Paksinghar</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchPage('authPanel', this)">Portal</button>
+            <button class="nav-btn" onclick="switchPage('aboutPanel', this)">About Us</button>
+            <button class="nav-btn" onclick="switchPage('contactPanel', this)">Contact Us</button>
+            <button class="nav-btn" onclick="switchPage('privacyPanel', this)">Privacy Policy</button>
+        </div>
+    </nav>
 
     <div class="wrapper">
 
-        <!-- 1. AUTH PANEL -->
+        <!-- 1. AUTH PANEL (Home / Login / Signup) -->
         <div id="authPanel" class="card-panel active">
+            <div class="school-banner">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80" alt="School Campus">
+            </div>
+
             <div class="header-box">
-                <div class="logo-frame">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Emblem">
-                </div>
                 <h1>GBHSS Paksinghar</h1>
                 <p>Institutional Portal & Secure Admission System</p>
             </div>
@@ -286,6 +389,10 @@
 
         <!-- 2. ADMISSION FORM PANEL -->
         <div id="admissionPanel" class="card-panel">
+            <div class="school-banner">
+                <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80" alt="Students">
+            </div>
+
             <div class="header-box" style="margin-bottom: 20px;">
                 <h1 style="font-size: 20px;">Official Admission Application</h1>
                 <p>Academic Session: Aug 15, 2026 – Dec</p>
@@ -316,7 +423,6 @@
                     </select>
                 </div>
 
-                <!-- Dynamic Groups for 10th-12th -->
                 <div class="input-box" id="groupWrapper" style="display: none;">
                     <i class="fa-regular fa-book-open left-icon"></i>
                     <select class="input-control">
@@ -353,10 +459,78 @@
             </form>
         </div>
 
+        <!-- 3. ABOUT US PANEL -->
+        <div id="aboutPanel" class="card-panel">
+            <div class="school-banner">
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80" alt="Campus Life">
+            </div>
+            <div class="header-box">
+                <h1>About Our Institution</h1>
+                <p>Dedicated to academic excellence and moral integrity</p>
+            </div>
+            <div class="content-body">
+                <h3>Our Legacy</h3>
+                <p>Government Boys Higher Secondary School (GBHSS) Paksinghar stands as a pillar of quality education, fostering intellectual growth, leadership, and discipline among students.</p>
+                <h3>Mission & Vision</h3>
+                <p>We strive to provide modern educational facilities combined with ethical values, preparing the youth for future scientific, technical, and professional challenges.</p>
+            </div>
+        </div>
+
+        <!-- 4. CONTACT US PANEL -->
+        <div id="contactPanel" class="card-panel">
+            <div class="school-banner">
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80" alt="Library">
+            </div>
+            <div class="header-box">
+                <h1>Get In Touch</h1>
+                <p>We are here to help and answer any questions you might have</p>
+            </div>
+            <div class="content-body">
+                <div class="info-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>GBHSS Paksinghar, Sindh, Pakistan</span>
+                </div>
+                <div class="info-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>kingbozdarjan@gmail.com</span>
+                </div>
+                <div class="info-card">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+92 Official Admin Desk</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. PRIVACY POLICY PANEL -->
+        <div id="privacyPanel" class="card-panel">
+            <div class="school-banner">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" alt="Secure Learning">
+            </div>
+            <div class="header-box">
+                <h1>Privacy Policy</h1>
+                <p>Your institutional data security and privacy matters to us</p>
+            </div>
+            <div class="content-body">
+                <h3>Data Collection</h3>
+                <p>All student information, credentials, and documentation submitted via this portal are strictly encrypted and used exclusively for official admissions and academic records.</p>
+                <h3>Security Standards</h3>
+                <p>We implement strict measures to protect your personal details against unauthorized access, modification, or disclosure.</p>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // Password Visibility Toggle Logic Fixed
+        // Switch Between Different Main Navigation Pages
+        function switchPage(panelId, btnElement) {
+            document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(panelId).classList.add('active');
+            if(btnElement) btnElement.classList.add('active');
+        }
+
+        // Password Visibility Toggle Logic
         function togglePasswordVisibility(fieldId, iconElement) {
             const passwordField = document.getElementById(fieldId);
             if (passwordField.type === "password") {
@@ -370,7 +544,7 @@
             }
         }
 
-        // Tab Switching Logic
+        // Tab Switching Logic (Sign In / Register)
         function switchAuthTab(type, e) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             e.target.classList.add('active');
@@ -384,32 +558,23 @@
             }
         }
 
-        // Placeholder for future live Auth & Email notification setup
         function handleAuthSubmit(e, actionType) {
             e.preventDefault();
-            // TODO: Connect your backend or Email API service here later
             transitionToAdmission();
         }
 
         function handleGoogleLogin(e) {
             e.preventDefault();
-            // TODO: Connect Google Auth provider here later
             transitionToAdmission();
         }
 
-        // Smooth Panel Transition to Admission Form
+        // Smooth Transition to Admission Form Panel
         function transitionToAdmission() {
-            const authPanel = document.getElementById('authPanel');
-            const admissionPanel = document.getElementById('admissionPanel');
+            document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             
-            authPanel.classList.remove('active');
-            setTimeout(() => {
-                authPanel.style.display = 'none';
-                admissionPanel.style.display = 'block';
-                setTimeout(() => {
-                    admissionPanel.classList.add('active');
-                }, 50);
-            }, 300);
+            const admissionPanel = document.getElementById('admissionPanel');
+            admissionPanel.classList.add('active');
         }
 
         // Dynamic Group Selector Check
@@ -430,10 +595,8 @@
             }
         }
 
-        // Final Submission handler placeholder
         function handleFinalSubmission(e) {
             e.preventDefault();
-            // TODO: Hook email service to send details
             alert("Form ready for backend integration!");
         }
     </script>
