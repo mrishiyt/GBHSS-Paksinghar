@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form - GBHSS Paksinghar</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 20px; display: flex; justify-content: center; }
+        .form-card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        h2 { color: #004080; text-align: center; margin-bottom: 20px; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #333; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .submit-btn { width: 100%; background: #004080; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 25px; }
+        .submit-btn:hover { background: #002b5c; }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <h2>Student Admission Form</h2>
+        <form id="admissionForm" onsubmit="handleFormSubmit(event)">
+            <label>Full Name:</label>
+            <input type="text" id="fullName" required placeholder="Enter student name">
+
+            <label>Father's Name:</label>
+            <input type="text" id="fatherName" required placeholder="Enter father name">
+
+            <label>Select Class:</label>
+            <select id="studentClass" onchange="toggleGroups()" required>
+                <option value="">-- Choose Class --</option>
+                <option value="6th">6th Class</option>
+                <option value="7th">7th Class</option>
+                <option value="8th">8th Class</option>
+                <option value="9th">9th Class</option>
+                <option value="10th">10th Class</option>
+                <option value="11th">11th Class</option>
+                <option value="12th">12th Class</option>
+            </select>
+
+            <!-- Dynamic Group (Sirf 10th se 12th ke liye show hoga) -->
+            <div id="groupDiv" style="display: none;">
+                <label>Select Study Group:</label>
+                <select id="studyGroup">
+                    <option value="Medical">Medical</option>
+                    <option value="Engineering">Engineering</option>
+                </select>
+            </div>
+
+            <label>Previous Class Certificate / Marksheet (Image):</label>
+            <input type="file" id="certificateImg" accept="image/*" required>
+
+            <label>Father's CNIC (Image):</label>
+            <input type="file" id="cnicImg" accept="image/*" required>
+
+            <button type="submit" class="submit-btn">Submit Admission Form</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleGroups() {
+            let studentClass = document.getElementById("studentClass").value;
+            let groupDiv = document.getElementById("groupDiv");
+            if (["10th", "11th", "12th"].includes(studentClass)) {
+                groupDiv.style.display = "block";
+            } else {
+                groupDiv.style.display = "none";
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert("Form submitted successfully! (Aapke kingbozdarjan@gmail.com par notification jald connect ho jayegi).");
+            window.location.href = "https://www.stbb.com.pk"; // Redirect to Sindh Textbook Board
+        }
+    </script>
+</body>
+</html>
