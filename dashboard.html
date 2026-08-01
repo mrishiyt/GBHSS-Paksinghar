@@ -3,55 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admission Form - GBHSS Paksinghar</title>
+    <title>Admission Portal - GBHSS Paksinghar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 20px; display: flex; justify-content: center; }
-        .form-card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
-        h2 { color: #004080; text-align: center; margin-bottom: 20px; }
-        label { display: block; margin-top: 15px; font-weight: bold; color: #333; font-size: 14px; }
-        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .submit-btn { width: 100%; background: #004080; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 25px; }
-        .submit-btn:hover { background: #002b5c; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .portal-wrapper {
+            background: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 20px;
+        }
+        .portal-header h2 {
+            color: #1e3a8a;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .portal-header p {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 13.5px;
+            color: #334155;
+        }
+
+        input[type="text"], select, input[type="file"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: #3b82f6;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .submit-btn {
+            background: #1e3a8a;
+            color: white;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .submit-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Dynamic Section Animation */
+        #groupDiv {
+            animation: slideDown 0.4s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="form-card">
-        <h2>Student Admission Form</h2>
-        <form id="admissionForm" onsubmit="handleFormSubmit(event)">
-            <label>Full Name:</label>
-            <input type="text" id="fullName" required placeholder="Enter student name">
 
-            <label>Father's Name:</label>
-            <input type="text" id="fatherName" required placeholder="Enter father name">
+    <div class="portal-wrapper">
+        <div class="portal-header">
+            <h2>Official Admission Form</h2>
+            <p>GBHSS Paksinghar • Academic Session</p>
+        </div>
 
-            <label>Select Class:</label>
-            <select id="studentClass" onchange="toggleGroups()" required>
-                <option value="">-- Choose Class --</option>
-                <option value="6th">6th Class</option>
-                <option value="7th">7th Class</option>
-                <option value="8th">8th Class</option>
-                <option value="9th">9th Class</option>
-                <option value="10th">10th Class</option>
-                <option value="11th">11th Class</option>
-                <option value="12th">12th Class</option>
-            </select>
+        <form id="admissionForm" onsubmit="submitForm(event)">
+            <div class="form-group">
+                <label>Student Full Name:</label>
+                <input type="text" id="fullName" required placeholder="Enter student's full name">
+            </div>
 
-            <!-- Dynamic Group (Sirf 10th se 12th ke liye show hoga) -->
-            <div id="groupDiv" style="display: none;">
-                <label>Select Study Group:</label>
-                <select id="studyGroup">
-                    <option value="Medical">Medical</option>
-                    <option value="Engineering">Engineering</option>
+            <div class="form-group">
+                <label>Father's Name:</label>
+                <input type="text" id="fatherName" required placeholder="Enter father's name">
+            </div>
+
+            <div class="form-group">
+                <label>Select Admission Class:</label>
+                <select id="studentClass" onchange="toggleGroups()" required>
+                    <option value="">-- Choose Class --</option>
+                    <option value="6th">6th Class</option>
+                    <option value="7th">7th Class</option>
+                    <option value="8th">8th Class</option>
+                    <option value="9th">9th Class</option>
+                    <option value="10th">10th Class</option>
+                    <option value="11th">11th Class</option>
+                    <option value="12th">12th Class</option>
                 </select>
             </div>
 
-            <label>Previous Class Certificate / Marksheet (Image):</label>
-            <input type="file" id="certificateImg" accept="image/*" required>
+            <!-- Dynamic Group Options (Appears only for 10th to 12th) -->
+            <div class="form-group" id="groupDiv" style="display: none;">
+                <label>Select Study Group:</label>
+                <select id="studyGroup">
+                    <option value="Medical">Medical Group</option>
+                    <option value="Engineering">Engineering Group</option>
+                </select>
+            </div>
 
-            <label>Father's CNIC (Image):</label>
-            <input type="file" id="cnicImg" accept="image/*" required>
+            <div class="form-group">
+                <label>Previous Class Certificate / Marksheet (Image):</label>
+                <input type="file" id="certificateImg" accept="image/*" required>
+            </div>
 
-            <button type="submit" class="submit-btn">Submit Admission Form</button>
+            <div class="form-group">
+                <label>Father's CNIC Copy (Image):</label>
+                <input type="file" id="cnicImg" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Application</button>
         </form>
     </div>
 
@@ -66,10 +184,10 @@
             }
         }
 
-        function handleFormSubmit(e) {
+        function submitForm(e) {
             e.preventDefault();
-            alert("Form submitted successfully! (Aapke kingbozdarjan@gmail.com par notification jald connect ho jayegi).");
-            window.location.href = "https://www.stbb.com.pk"; // Redirect to Sindh Textbook Board
+            alert("Application submitted successfully! Redirecting to official curriculum board...");
+            window.location.href = "https://www.stbb.com.pk";
         }
     </script>
 </body>
