@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Firebase SDK Scripts -->
+    <!-- Firebase Compatibility SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
@@ -313,14 +313,15 @@
     </div>
 
     <script>
-        // --- REAL FIREBASE INITIALIZATION ---
+        // --- YOUR REAL FIREBASE CONFIGURATION ---
         const firebaseConfig = {
-            apiKey: "AIzaSyDummyKey_ReplaceThisWithYoursIfAvailable",
+            apiKey: "AIzaSyATuM-m_qFZXzT4zKuBWT8Ct0_0xRmF86Q",
             authDomain: "gbhss-portal.firebaseapp.com",
             projectId: "gbhss-portal",
-            storageBucket: "gbhss-portal.appspot.com",
-            messagingSenderId: "1234567890",
-            appId: "1:1234567890:web:abcdef"
+            storageBucket: "gbhss-portal.firebasestorage.app",
+            messagingSenderId: "1049905516160",
+            appId: "1:1049905516160:web:4d95fd39dd93ad54f8a065",
+            measurementId: "G-JLHJ518QLS"
         };
         
         // Initialize Firebase
@@ -336,14 +337,11 @@
 
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    alert("Account Successfully Created!");
+                    alert("Account Successfully Created on Firebase!");
                     transitionToAdmission();
                 })
                 .catch((error) => {
-                    // Local Storage Fallback for Demo / Offline testing
-                    localStorage.setItem("user_" + email, password);
-                    alert("Account registered locally! Redirecting...");
-                    transitionToAdmission();
+                    alert("Error: " + error.message);
                 });
         }
 
@@ -355,22 +353,15 @@
 
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    alert("Login Successful!");
+                    alert("Welcome! Login Successful.");
                     transitionToAdmission();
                 })
                 .catch((error) => {
-                    // Check local storage fallback
-                    const savedPass = localStorage.getItem("user_" + email);
-                    if(savedPass && savedPass === password) {
-                        alert("Login Successful!");
-                        transitionToAdmission();
-                    } else {
-                        alert("Invalid Email or Password!");
-                    }
+                    alert("Login Failed: " + error.message);
                 });
         }
 
-        // UI Page Switchers
+        // UI Navigation
         function switchPage(panelId, btnElement) {
             document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -387,7 +378,7 @@
             } else {
                 passwordField.type = "password";
                 iconElement.classList.remove("fa-eye-slash");
-                iconElement.classList.left = "fa-eye";
+                iconElement.classList.add("fa-eye");
             }
         }
 
@@ -408,7 +399,7 @@
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider)
                 .then(() => transitionToAdmission())
-                .catch(() => transitionToAdmission());
+                .catch((error) => alert("Google Sign-In Error: " + error.message));
         }
 
         function transitionToAdmission() {
