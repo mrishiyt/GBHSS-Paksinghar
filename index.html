@@ -153,7 +153,8 @@
                     <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('loginPass', this)"></i>
                 </div>
                 <div class="forgot-row">
-                    <span class="forgot-link" onclick="switchPage('forgotPanel', null)">Forgot Password?</span>
+                    <!-- Yeh link ab alag naye browser tab mein forgot.html ko kholega -->
+                    <a href="forgot.html" target="_blank" class="forgot-link">Forgot Password?</a>
                 </div>
                 <button type="submit" class="btn-submit">
                     <span>Access Portal</span>
@@ -190,64 +191,7 @@
             </button>
         </div>
 
-        <!-- 2. FORGOT PASSWORD PANEL (STEP 1 & 2) -->
-        <div id="forgotPanel" class="card-panel">
-            <div class="school-banner">
-                <div class="banner-overlay"></div>
-                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=80" alt="Secure Recovery">
-            </div>
-
-            <div class="header-box">
-                <h1>Password Recovery</h1>
-                <p>Restore secure access to your portal account</p>
-            </div>
-
-            <!-- Step 1: Enter Email -->
-            <div id="forgotStep1">
-                <form onsubmit="handleSendCode(event)">
-                    <div class="input-box">
-                        <i class="fa-regular fa-envelope left-icon"></i>
-                        <input type="email" id="recoveryEmail" class="input-control" placeholder="Enter Your Registered Email" required>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <span>Send 4-Digit SMS Code</span>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Step 2: Enter 4-Digit Code & New Passwords -->
-            <div id="forgotStep2" style="display: none;">
-                <div class="notice-box">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>A 4-digit verification code has been sent to your phone/email. (Demo Code: <strong>1234</strong>)</span>
-                </div>
-                <form onsubmit="handleVerifyAndReset(event)">
-                    <div class="input-box">
-                        <i class="fa-regular fa-shield-keyhole left-icon"></i>
-                        <input type="text" id="verificationCode" class="input-control" placeholder="Enter 4-Digit Code" maxlength="4" required>
-                    </div>
-                    <div class="input-box">
-                        <i class="fa-regular fa-lock left-icon"></i>
-                        <input type="password" id="newPass" class="input-control" placeholder="New Password" required>
-                    </div>
-                    <div class="input-box">
-                        <i class="fa-regular fa-lock-keyhole left-icon"></i>
-                        <input type="password" id="confirmPass" class="input-control" placeholder="Confirm New Password" required>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <span>Update Password</span>
-                        <i class="fa-solid fa-check-double"></i>
-                    </button>
-                </form>
-            </div>
-
-            <div style="text-align: center; margin-top: 18px;">
-                <span class="forgot-link" onclick="switchPage('authPanel', document.querySelector('.nav-btn'))"><i class="fa-solid fa-arrow-left"></i> Back to Sign In</span>
-            </div>
-        </div>
-
-        <!-- 3. ADMISSION FORM PANEL -->
+        <!-- 2. ADMISSION FORM PANEL -->
         <div id="admissionPanel" class="card-panel">
             <div class="school-banner">
                 <div class="banner-overlay"></div>
@@ -319,7 +263,7 @@
             </form>
         </div>
 
-        <!-- 4. ABOUT US PANEL -->
+        <!-- 3. ABOUT US PANEL -->
         <div id="aboutPanel" class="card-panel">
             <div class="school-banner">
                 <div class="banner-overlay"></div>
@@ -335,7 +279,7 @@
             </div>
         </div>
 
-        <!-- 5. CONTACT US PANEL -->
+        <!-- 4. CONTACT US PANEL -->
         <div id="contactPanel" class="card-panel">
             <div class="school-banner">
                 <div class="banner-overlay"></div>
@@ -353,7 +297,7 @@
             </div>
         </div>
 
-        <!-- 6. PRIVACY POLICY PANEL -->
+        <!-- 5. PRIVACY POLICY PANEL -->
         <div id="privacyPanel" class="card-panel">
             <div class="school-banner">
                 <div class="banner-overlay"></div>
@@ -413,41 +357,6 @@
                 .catch((error) => {
                     alert("Login Failed: " + error.message);
                 });
-        }
-
-        function handleSendCode(e) {
-            e.preventDefault();
-            const email = document.getElementById('recoveryEmail').value;
-            if(!email) return;
-            alert("4-digit code sent to your email/phone! (Demo code is: 1234)");
-            document.getElementById('forgotStep1').style.display = 'none';
-            document.getElementById('forgotStep2').style.display = 'block';
-        }
-
-        function handleVerifyAndReset(e) {
-            e.preventDefault();
-            const code = document.getElementById('verificationCode').value;
-            const newPass = document.getElementById('newPass').value;
-            const confirmPass = document.getElementById('confirmPass').value;
-
-            if(code !== "1234") {
-                alert("Invalid 4-digit code! Please enter '1234' for demo.");
-                return;
-            }
-
-            if(newPass !== confirmPass) {
-                alert("Passwords do not match!");
-                return;
-            }
-
-            alert("Password Changed Successfully! Redirecting to Sign In...");
-            document.getElementById('forgotStep1').style.display = 'block';
-            document.getElementById('forgotStep2').style.display = 'none';
-            document.getElementById('recoveryEmail').value = '';
-            document.getElementById('verificationCode').value = '';
-            document.getElementById('newPass').value = '';
-            document.getElementById('confirmPass').value = '';
-            switchPage('authPanel', document.querySelector('.nav-btn'));
         }
 
         function switchPage(panelId, btnElement) {
