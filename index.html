@@ -14,7 +14,6 @@
             --dark: #0f172a;
             --light: #f8fafc;
             --gray: #64748b;
-            --border: #e2e8f0;
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -36,13 +35,9 @@
             position: relative;
         }
 
-        /* Dynamic High-End Background Effect */
         .bg-mesh {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
                 radial-gradient(at 10% 20%, rgba(2, 132, 199, 0.25) 0px, transparent 50%),
                 radial-gradient(at 90% 80%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
@@ -50,23 +45,6 @@
             z-index: -1;
         }
 
-        .ambient-glow {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(56, 189, 248, 0.05));
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulseGlow 10s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulseGlow {
-            0% { transform: scale(0.9) translate(-20px, -20px); }
-            100% { transform: scale(1.1) translate(20px, 20px); }
-        }
-
-        /* App Container Layout */
         .app-container {
             width: 100%;
             max-width: 480px;
@@ -74,380 +52,155 @@
             z-index: 1;
         }
 
-        /* Card Panels with Glassmorphism */
         .panel {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-            position: absolute;
-            width: calc(100% - 40px);
-            max-width: 480px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(30px) scale(0.98);
+            padding: 35px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
         }
 
         .panel.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
+            display: block;
         }
 
-        .panel.exit {
-            opacity: 0;
-            transform: translateY(-30px) scale(0.98);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header UI Branding */
         .brand-header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 25px;
         }
 
         .emblem-badge {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(56, 189, 248, 0.1));
+            width: 65px; height: 65px;
+            background: rgba(2, 132, 199, 0.15);
             border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 16px;
-            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.3);
-            animation: floatBadge 4s ease-in-out infinite;
-        }
-
-        @keyframes floatBadge {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            border-radius: 18px;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 12px;
         }
 
         .emblem-badge img {
-            width: 40px;
-            height: auto;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            width: 35px; height: auto;
         }
 
         .brand-header h1 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-            margin-bottom: 6px;
+            font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px;
         }
 
         .brand-header p {
-            font-size: 13.5px;
-            color: var(--gray);
-            font-weight: 500;
+            font-size: 13px; color: var(--gray);
         }
 
-        /* Tab Switcher (Login / Signup) */
         .auth-switch {
-            display: flex;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 4px;
-            margin-bottom: 28px;
+            display: flex; background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px; padding: 4px; margin-bottom: 20px;
         }
 
         .switch-btn {
-            flex: 1;
-            padding: 11px;
-            border: none;
-            background: transparent;
-            color: var(--gray);
-            font-weight: 600;
-            font-size: 13.5px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: var(--transition);
+            flex: 1; padding: 10px; border: none; background: transparent;
+            color: var(--gray); font-weight: 600; font-size: 13px;
+            border-radius: 8px; cursor: pointer; transition: var(--transition);
         }
 
         .switch-btn.active {
-            background: var(--primary);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+            background: var(--primary); color: #fff;
         }
 
-        /* Form Layout Elements */
         .input-group {
-            position: relative;
-            margin-bottom: 18px;
+            position: relative; margin-bottom: 15px;
         }
 
         .input-group i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-            font-size: 15px;
-            transition: var(--transition);
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--gray); font-size: 14px;
         }
 
         .input-field {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 13px 16px 13px 46px;
-            color: #ffffff;
-            font-size: 14px;
-            outline: none;
-            transition: var(--transition);
+            width: 100%; background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px; padding: 12px 15px 12px 42px;
+            color: #fff; font-size: 14px; outline: none; transition: var(--transition);
         }
 
         .input-field:focus {
-            border-color: var(--primary);
-            background: rgba(2, 132, 199, 0.05);
-            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+            border-color: var(--primary); background: rgba(2, 132, 199, 0.05);
         }
 
-        .input-field:focus + i, .input-field:not(:placeholder-shown) + i {
-            color: var(--accent);
-        }
-
-        /* Custom Dropdowns & File Inputs */
         select.input-field {
-            appearance: none;
-            cursor: pointer;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
+            appearance: none; cursor: pointer;
         }
+        select.input-field option { background: var(--dark); color: #fff; }
 
-        select.input-field option {
-            background: var(--dark);
-            color: #ffffff;
+        .file-box {
+            border: 1px dashed rgba(255, 255, 255, 0.2); border-radius: 10px;
+            padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02);
+            position: relative; cursor: pointer;
         }
-
-        .file-upload-box {
-            border: 1.5px dashed rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
+        .file-box input {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
         }
+        .file-box span { font-size: 12.5px; color: var(--gray); }
 
-        .file-upload-box:hover {
-            border-color: var(--primary);
-            background: rgba(2, 132, 199, 0.03);
-        }
-
-        .file-upload-box input[type="file"] {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-upload-text {
-            font-size: 13px;
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .file-upload-text i {
-            color: var(--accent);
-            font-size: 16px;
-        }
-
-        /* Primary Action Button */
         .btn-primary {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #ffffff;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
-            transition: var(--transition);
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            width: 100%; background: var(--primary); color: #fff; border: none;
+            padding: 12px; border-radius: 10px; font-weight: 600; font-size: 14px;
+            cursor: pointer; transition: var(--transition); margin-top: 5px;
         }
+        .btn-primary:hover { background: var(--primary-dark); }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(2, 132, 199, 0.45);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        /* Divider */
         .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 22px 0;
-            color: var(--gray);
-            font-size: 12px;
+            text-align: center; margin: 18px 0; color: var(--gray); font-size: 11px; text-transform: uppercase;
         }
 
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .divider span {
-            padding: 0 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Google SSO Button Style */
         .btn-google {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            padding: 13px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: var(--transition);
+            width: 100%; background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
+            padding: 11px; border-radius: 10px; font-weight: 600; font-size: 13px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-
-        .btn-google:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .btn-google img {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Scrollbar aesthetics inside panels */
-        .panel::-webkit-scrollbar {
-            width: 5px;
-        }
-        .panel::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-        }
-
-        /* Success State Animation */
-        .success-screen {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 2px solid #10b981;
-            color: #10b981;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin: 0 auto 20px;
-            animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0); }
-            70% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .success-screen h3 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .success-screen p {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.5;
-            margin-bottom: 24px;
-        }
-
-        /* Responsive adjustments */
-        @media (max-height: 750px) {
-            .panel {
-                max-height: 85vh;
-                overflow-y: auto;
-            }
-        }
+        .btn-google img { width: 16px; height: 16px; }
     </style>
 </head>
 <body>
 
     <div class="bg-mesh"></div>
-    <div class="ambient-glow"></div>
 
     <div class="app-container">
-
-        <!-- 1. AUTH PANEL (LOGIN & SIGNUP TOGGLE) -->
+        <!-- 1. LOGIN / SIGNUP PANEL -->
         <div id="authPanel" class="panel active">
             <div class="brand-header">
                 <div class="emblem-badge">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Emblem">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Logo">
                 </div>
                 <h1>GBHSS Paksinghar</h1>
-                <p>Institutional Admission & Secure Portal</p>
+                <p>Institutional Portal & Admission System</p>
             </div>
 
-            <!-- Tab Switcher -->
             <div class="auth-switch">
-                <button class="switch-btn active" onclick="switchTab('login')">Sign In</button>
-                <button class="switch-btn" onclick="switchTab('signup')">Register</button>
+                <button class="switch-btn active" onclick="switchTab('login', event)">Sign In</button>
+                <button class="switch-btn" onclick="switchTab('signup', event)">Register</button>
             </div>
 
-            <!-- Login Form -->
-            <form id="loginForm" onsubmit="handleLogin(event)">
+            <form id="loginForm" onsubmit="goToAdmission(event)">
                 <div class="input-group">
-                    <input type="email" class="input-field" placeholder="Institutional Email Address" required>
+                    <input type="email" class="input-field" placeholder="Email Address" required>
                     <i class="fa-regular fa-envelope"></i>
                 </div>
                 <div class="input-group">
-                    <input type="password" class="input-field" placeholder="Secure Password" required>
+                    <input type="password" class="input-field" placeholder="Password" required>
                     <i class="fa-regular fa-lock"></i>
                 </div>
-                <button type="submit" class="btn-primary">
-                    <span>Access Portal</span>
-                    <i class="fa-solid fa-arrow-right-long"></i>
-                </button>
+                <button type="submit" class="btn-primary">Sign In to Portal</button>
             </form>
 
-            <!-- Signup Form (Hidden by default) -->
-            <form id="signupForm" onsubmit="handleSignup(event)" style="display: none;">
+            <form id="signupForm" onsubmit="goToAdmission(event)" style="display: none;">
                 <div class="input-group">
                     <input type="text" class="input-field" placeholder="Full Name" required>
                     <i class="fa-regular fa-user"></i>
@@ -460,43 +213,35 @@
                     <input type="password" class="input-field" placeholder="Create Password" required>
                     <i class="fa-regular fa-lock"></i>
                 </div>
-                <button type="submit" class="btn-primary">
-                    <span>Create Account</span>
-                    <i class="fa-solid fa-user-plus"></i>
-                </button>
+                <button type="submit" class="btn-primary">Create Account</button>
             </form>
 
-            <div class="divider"><span>Or continue with</span></div>
-
-            <!-- Google SSO Integration Button -->
-            <button type="button" class="btn-google" onclick="triggerGoogleSSO()">
+            <div class="divider">or continue with</div>
+            <button type="button" class="btn-google" onclick="goToAdmission(event)">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-                <span>Continue with Google</span>
+                Continue with Google
             </button>
         </div>
 
-
-        <!-- 2. DYNAMIC ADMISSION FORM PANEL -->
+        <!-- 2. ADMISSION FORM PANEL -->
         <div id="admissionPanel" class="panel">
-            <div class="brand-header" style="margin-bottom: 20px;">
-                <h1 style="font-size: 20px;">Student Admission Application</h1>
-                <p>Academic Session (August 15, 2026 - Dec)</p>
+            <div class="brand-header">
+                <h1>Student Admission Form</h1>
+                <p>Session: 15th August 2026 - Dec</p>
             </div>
 
-            <form id="admissionForm" onsubmit="handleAdmissionSubmit(event)">
+            <form onsubmit="submitAdmission(event)">
                 <div class="input-group">
-                    <input type="text" id="fullName" class="input-field" placeholder="Student Full Name" required>
+                    <input type="text" class="input-field" placeholder="Student Full Name" required>
                     <i class="fa-regular fa-id-badge"></i>
                 </div>
-
                 <div class="input-group">
-                    <input type="text" id="fatherName" class="input-field" placeholder="Father's Full Name" required>
+                    <input type="text" class="input-field" placeholder="Father's Name" required>
                     <i class="fa-regular fa-user-tie"></i>
                 </div>
-
                 <div class="input-group">
-                    <select id="studentClass" class="input-field" onchange="toggleStudyGroups()" required>
-                        <option value="" disabled selected>Select Current Class Level</option>
+                    <select id="classSelect" class="input-field" onchange="checkGroup()" required>
+                        <option value="" disabled selected>Select Class</option>
                         <option value="6th">Class 6th</option>
                         <option value="7th">Class 7th</option>
                         <option value="8th">Class 8th</option>
@@ -508,142 +253,66 @@
                     <i class="fa-regular fa-graduation-cap"></i>
                 </div>
 
-                <!-- Dynamic Study Groups (Triggered for 10th to 12th) -->
-                <div class="input-group" id="groupContainer" style="display: none;">
-                    <select id="studyGroup" class="input-field">
-                        <option value="" disabled selected>Select Faculty/Group</option>
-                        <option value="Medical">Medical Science Group</option>
-                        <option value="Engineering">Pre-Engineering Group</option>
+                <div class="input-group" id="groupDiv" style="display: none;">
+                    <select class="input-field">
+                        <option value="" disabled selected>Select Group</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Engineering">Engineering</option>
                     </select>
-                    <i class="fa-regular fa-book-open"></i>
+                    <i class="fa-regular fa-book"></i>
                 </div>
 
                 <div class="input-group">
-                    <div class="file-upload-box">
-                        <input type="file" id="certificateFile" accept="image/*" required onchange="updateFileName(this, 'certText')">
-                        <div class="file-upload-text">
-                            <i class="fa-regular fa-file-arrow-up"></i>
-                            <span id="certText">Upload Previous Class Certificate</span>
-                        </div>
+                    <div class="file-box">
+                        <input type="file" accept="image/*" required onchange="this.nextElementSibling.innerText = this.files[0].name">
+                        <span>Upload Previous Class Certificate (Image)</span>
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <div class="file-upload-box">
-                        <input type="file" id="cnicFile" accept="image/*" required onchange="updateFileName(this, 'cnicText')">
-                        <div class="file-upload-text">
-                            <i class="fa-regular fa-address-card"></i>
-                            <span id="cnicText">Upload Father's CNIC Image</span>
-                        </div>
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <div class="file-box">
+                        <input type="file" accept="image/*" required onchange="this.nextElementSibling.innerText = this.files[0].name">
+                        <span>Upload Father's CNIC Copy (Image)</span>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-primary">
-                    <span>Submit Official Application</span>
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
+                <button type="submit" class="btn-primary">Submit Application</button>
             </form>
         </div>
-
-
-        <!-- 3. SUCCESS REDIRECT PANEL -->
-        <div id="successPanel" class="panel">
-            <div class="success-screen">
-                <div class="success-icon">
-                    <i class="fa-solid fa-check"></i>
-                </div>
-                <h3>Application Submitted!</h3>
-                <p>Your admission form has been securely transmitted to the administration office at <strong>kingbozdarjan@gmail.com</strong>.<br><br>Upon approval notification, classes commence on <strong>15th August 2026</strong>.</p>
-                <button type="button" class="btn-primary" onclick="redirectToSTBB()">
-                    <span>Proceed to STBB Portal</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </button>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        // Tab switching controller
-        function switchTab(tab) {
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
-            const btns = document.querySelectorAll('.switch-btn');
-
-            btns.forEach(b => b.classList.remove('active'));
-
+        function switchTab(tab, e) {
+            document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
             if(tab === 'login') {
-                loginForm.style.display = 'block';
-                signupForm.style.display = 'none';
-                event.target.classList.add('active');
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('signupForm').style.display = 'none';
             } else {
-                loginForm.style.display = 'none';
-                signupForm.style.display = 'block';
-                event.target.classList.add('active');
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('signupForm').style.display = 'block';
             }
         }
 
-        // Transition panel effects
-        function transitionPanel(hideId, showId) {
-            const hideEl = document.getElementById(hideId);
-            const showEl = document.getElementById(showId);
-
-            hideEl.classList.add('exit');
-            setTimeout(() => {
-                hideEl.classList.remove('active', 'exit');
-                showEl.classList.add('active');
-            }, 300);
-        }
-
-        // Simulate Google SSO & Authentication Sequence
-        function handleLogin(e) {
+        function goToAdmission(e) {
             e.preventDefault();
-            transitionPanel('authPanel', 'admissionPanel');
+            document.getElementById('authPanel').classList.remove('active');
+            document.getElementById('admissionPanel').classList.add('active');
         }
 
-        function handleSignup(e) {
-            e.preventDefault();
-            transitionPanel('authPanel', 'admissionPanel');
-        }
-
-        function triggerGoogleSSO() {
-            // High-end simulated SSO confirmation feedback
-            const btn = document.querySelector('.btn-google');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Authenticating Account...`;
-            setTimeout(() => {
-                transitionPanel('authPanel', 'admissionPanel');
-            }, 800);
-        }
-
-        // Dynamic Study Group Logic for Classes 10th to 12th
-        function toggleStudyGroups() {
-            const selectedClass = document.getElementById('studentClass').value;
-            const groupContainer = document.getElementById('groupContainer');
-            
-            if(['10th', '11th', '12th'].includes(selectedClass)) {
-                groupContainer.style.display = 'block';
-                document.getElementById('studyGroup').setAttribute('required', 'true');
+        function checkGroup() {
+            let cls = document.getElementById('classSelect').value;
+            let groupDiv = document.getElementById('groupDiv');
+            if(['10th', '11th', '12th'].includes(cls)) {
+                groupDiv.style.display = 'block';
             } else {
-                groupContainer.style.display = 'none';
-                document.getElementById('studyGroup').removeAttribute('required');
+                groupDiv.style.display = 'none';
             }
         }
 
-        // Update file label text dynamically when selected
-        function updateFileName(input, targetId) {
-            if(input.files && input.files[0]) {
-                document.getElementById(targetId).textContent = input.files[0].name;
-            }
-        }
-
-        // Final Admission Form Submission Handler
-        function handleAdmissionSubmit(e) {
+        function submitAdmission(e) {
             e.preventDefault();
-            transitionPanel('admissionPanel', 'successPanel');
-        }
-
-        // Redirect to Sindh Textbook Board Portal
-        function redirectToSTBB() {
+            alert("Application submitted successfully! Notification sent to kingbozdarjan@gmail.com. Redirecting to STBB...");
             window.location.href = "https://www.stbb.com.pk";
         }
     </script>
