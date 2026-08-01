@@ -138,15 +138,7 @@
             display: flex; justify-content: center; align-items: center;
             margin: 0 auto 16px;
             box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.4);
-            animation: bounceLogo 3s ease-in-out infinite;
         }
-
-        @keyframes bounceLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        .logo-frame img { width: 36px; height: auto; }
 
         .header-box h1 { font-size: 21px; font-weight: 700; color: #fff; margin-bottom: 6px; }
         .header-box p { font-size: 13px; color: var(--text-muted); font-weight: 500; }
@@ -270,7 +262,7 @@
         }
         .btn-google-sso img { width: 18px; height: 18px; }
 
-        /* Content Pages Styling (About, Contact, Privacy) */
+        /* Content Pages Styling */
         .content-body {
             font-size: 14px;
             line-height: 1.6;
@@ -304,6 +296,24 @@
         .info-card i {
             color: var(--accent);
             font-size: 16px;
+        }
+
+        /* Success Screen Styling */
+        .success-box {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .success-icon {
+            width: 72px; height: 72px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 20px;
+            color: #22c55e;
+            font-size: 30px;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
         }
     </style>
 </head>
@@ -459,7 +469,34 @@
             </form>
         </div>
 
-        <!-- 3. ABOUT US PANEL -->
+        <!-- 3. SUCCESS / THANK YOU PANEL -->
+        <div id="successPanel" class="card-panel">
+            <div class="success-box">
+                <div class="success-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h1 style="font-size: 22px; color: #fff; margin-bottom: 8px;">Application Submitted!</h1>
+                <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 24px;">Your admission request has been successfully recorded on the portal database.</p>
+                
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; margin-bottom: 24px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                        <span style="color: var(--text-muted);">Status:</span>
+                        <span style="color: #22c55e; font-weight: 600;">Pending Review</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                        <span style="color: var(--text-muted);">Reference ID:</span>
+                        <span style="color: #fff; font-weight: 600;">GBHSS-2026-8942</span>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-submit" onclick="switchPage('authPanel', document.querySelector('.nav-btn'))">
+                    <span>Return to Home</span>
+                    <i class="fa-solid fa-house"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. ABOUT US PANEL -->
         <div id="aboutPanel" class="card-panel">
             <div class="school-banner">
                 <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80" alt="Campus Life">
@@ -476,7 +513,7 @@
             </div>
         </div>
 
-        <!-- 4. CONTACT US PANEL -->
+        <!-- 5. CONTACT US PANEL -->
         <div id="contactPanel" class="card-panel">
             <div class="school-banner">
                 <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80" alt="Library">
@@ -501,7 +538,7 @@
             </div>
         </div>
 
-        <!-- 5. PRIVACY POLICY PANEL -->
+        <!-- 6. PRIVACY POLICY PANEL -->
         <div id="privacyPanel" class="card-panel">
             <div class="school-banner">
                 <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" alt="Secure Learning">
@@ -595,9 +632,11 @@
             }
         }
 
+        // Final Form Submission handler (Shows Success Screen instead of alert)
         function handleFinalSubmission(e) {
             e.preventDefault();
-            alert("Form ready for backend integration!");
+            document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById('successPanel').classList.add('active');
         }
     </script>
 </body>
