@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBHSS Paksinghar - Portal</title>
+    <title>GBHSS Paksinghar - Official Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #0284c7;
-            --primary-dark: #0369a1;
-            --accent: #38bdf8;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #60a5fa;
+            --bg-dark: #030712;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -25,8 +27,8 @@
         }
 
         body {
-            background-color: var(--dark);
-            color: var(--light);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -35,213 +37,282 @@
             position: relative;
         }
 
-        .bg-mesh {
+        /* Dynamic Mesh & Ambient Background */
+        .ambient-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                radial-gradient(at 10% 20%, rgba(2, 132, 199, 0.25) 0px, transparent 50%),
-                radial-gradient(at 90% 80%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.8) 0px, transparent 100%);
+                radial-gradient(at 15% 15%, rgba(37, 99, 235, 0.2) 0px, transparent 50%),
+                radial-gradient(at 85% 85%, rgba(96, 165, 250, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(3, 7, 18, 0.9) 0px, transparent 100%);
             z-index: -1;
         }
 
-        .app-container {
+        .glow-orb {
+            position: absolute;
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(96, 165, 250, 0.05));
+            filter: blur(90px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: floatOrb 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: scale(0.9) translate(-30px, -30px); }
+            100% { transform: scale(1.1) translate(30px, 30px); }
+        }
+
+        .wrapper {
             width: 100%;
             max-width: 480px;
             padding: 20px;
             z-index: 1;
         }
 
-        .panel {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* High-End Glassmorphism Cards */
+        .card-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
             border-radius: 24px;
-            padding: 35px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
             display: none;
-            animation: fadeIn 0.5s ease-in-out forwards;
+            animation: cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .panel.active {
+        .card-panel.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(25px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .brand-header {
+        /* Institutional Header */
+        .header-box {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
-        .emblem-badge {
-            width: 65px; height: 65px;
-            background: rgba(2, 132, 199, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 18px;
+        .logo-frame {
+            width: 70px; height: 70px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 20px;
             display: flex; justify-content: center; align-items: center;
-            margin: 0 auto 12px;
+            margin: 0 auto 16px;
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.3);
         }
 
-        .emblem-badge img {
-            width: 35px; height: auto;
+        .logo-frame img {
+            width: 38px; height: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
-        .brand-header h1 {
-            font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px;
+        .header-box h1 {
+            font-size: 21px; font-weight: 700; color: #fff;
+            letter-spacing: -0.3px; margin-bottom: 6px;
         }
 
-        .brand-header p {
-            font-size: 13px; color: var(--gray);
+        .header-box p {
+            font-size: 13px; color: var(--text-muted); font-weight: 500;
         }
 
-        .auth-switch {
-            display: flex; background: rgba(255, 255, 255, 0.04);
-            border-radius: 12px; padding: 4px; margin-bottom: 20px;
+        /* Modern Tab Switcher */
+        .tab-switcher {
+            display: flex; background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px; padding: 4px; margin-bottom: 24px;
         }
 
-        .switch-btn {
-            flex: 1; padding: 10px; border: none; background: transparent;
-            color: var(--gray); font-weight: 600; font-size: 13px;
-            border-radius: 8px; cursor: pointer; transition: var(--transition);
+        .tab-btn {
+            flex: 1; padding: 11px; border: none; background: transparent;
+            color: var(--text-muted); font-weight: 600; font-size: 13.5px;
+            border-radius: 10px; cursor: pointer; transition: var(--transition);
         }
 
-        .switch-btn.active {
+        .tab-btn.active {
             background: var(--primary); color: #fff;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
         }
 
-        .input-group {
-            position: relative; margin-bottom: 15px;
+        /* Form Controls */
+        .input-box {
+            position: relative; margin-bottom: 16px;
         }
 
-        .input-group i {
-            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-            color: var(--gray); font-size: 14px;
+        .input-box i {
+            position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted); font-size: 14px; transition: var(--transition);
         }
 
-        .input-field {
-            width: 100%; background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px; padding: 12px 15px 12px 42px;
+        .input-control {
+            width: 100%; background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px; padding: 13px 16px 13px 46px;
             color: #fff; font-size: 14px; outline: none; transition: var(--transition);
         }
 
-        .input-field:focus {
-            border-color: var(--primary); background: rgba(2, 132, 199, 0.05);
+        .input-control:focus {
+            border-color: var(--primary); background: rgba(37, 99, 235, 0.04);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
         }
 
-        select.input-field {
+        .input-control:focus + i { color: var(--accent); }
+
+        select.input-control {
             appearance: none; cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239ca3af' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 16px center;
         }
-        select.input-field option { background: var(--dark); color: #fff; }
 
-        .file-box {
-            border: 1px dashed rgba(255, 255, 255, 0.2); border-radius: 10px;
-            padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02);
-            position: relative; cursor: pointer;
+        select.input-control option { background: #0f172a; color: #fff; }
+
+        /* File Upload Styling */
+        .upload-field {
+            border: 1.5px dashed rgba(255, 255, 255, 0.15); border-radius: 12px;
+            padding: 14px; text-align: center; background: rgba(255, 255, 255, 0.01);
+            position: relative; cursor: pointer; transition: var(--transition);
         }
-        .file-box input {
+        .upload-field:hover {
+            border-color: var(--primary); background: rgba(37, 99, 235, 0.03);
+        }
+        .upload-field input {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
         }
-        .file-box span { font-size: 12.5px; color: var(--gray); }
-
-        .btn-primary {
-            width: 100%; background: var(--primary); color: #fff; border: none;
-            padding: 12px; border-radius: 10px; font-weight: 600; font-size: 14px;
-            cursor: pointer; transition: var(--transition); margin-top: 5px;
+        .upload-text {
+            font-size: 13px; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .btn-primary:hover { background: var(--primary-dark); }
+        .upload-text i { color: var(--accent); font-size: 15px; }
 
-        .divider {
-            text-align: center; margin: 18px 0; color: var(--gray); font-size: 11px; text-transform: uppercase;
+        /* Action Buttons */
+        .btn-submit {
+            width: 100%; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff; border: none; padding: 14px; border-radius: 12px;
+            font-weight: 600; font-size: 15px; cursor: pointer;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); transition: var(--transition); margin-top: 6px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px); box-shadow: 0 12px 25px rgba(37, 99, 235, 0.45);
         }
 
-        .btn-google {
-            width: 100%; background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
-            padding: 11px; border-radius: 10px; font-weight: 600; font-size: 13px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+        .divider-line {
+            display: flex; align-items: center; text-align: center; margin: 20px 0; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .btn-google img { width: 16px; height: 16px; }
+        .divider-line::before, .divider-line::after {
+            content: ''; flex: 1; border-bottom: 1px solid var(--border-color);
+        }
+        .divider-line span { padding: 0 10px; font-weight: 500; }
+
+        .btn-google-sso {
+            width: 100%; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color); color: #fff;
+            padding: 13px; border-radius: 12px; font-weight: 600; font-size: 14px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px;
+            transition: var(--transition);
+        }
+        .btn-google-sso:hover {
+            background: rgba(255, 255, 255, 0.09); border-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px);
+        }
+        .btn-google-sso img { width: 18px; height: 18px; }
+
+        /* Custom Scrollbar for smaller screens */
+        .card-panel::-webkit-scrollbar { width: 4px; }
+        .card-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="bg-mesh"></div>
+    <div class="ambient-bg"></div>
+    <div class="glow-orb"></div>
 
-    <div class="app-container">
-        <!-- 1. LOGIN / SIGNUP PANEL -->
-        <div id="authPanel" class="panel active">
-            <div class="brand-header">
-                <div class="emblem-badge">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Logo">
+    <div class="wrapper">
+
+        <!-- 1. AUTHENTICATION PANEL (LOGIN / SIGNUP) -->
+        <div id="authPanel" class="card-panel active">
+            <div class="header-box">
+                <div class="logo-frame">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Emblem">
                 </div>
                 <h1>GBHSS Paksinghar</h1>
-                <p>Institutional Portal & Admission System</p>
+                <p>Institutional Portal & Secure Admission System</p>
             </div>
 
-            <div class="auth-switch">
-                <button class="switch-btn active" onclick="switchTab('login', event)">Sign In</button>
-                <button class="switch-btn" onclick="switchTab('signup', event)">Register</button>
+            <div class="tab-switcher">
+                <button class="tab-btn active" onclick="switchAuthTab('login', event)">Sign In</button>
+                <button class="tab-btn" onclick="switchAuthTab('signup', event)">Register</button>
             </div>
 
-            <form id="loginForm" onsubmit="goToAdmission(event)">
-                <div class="input-group">
-                    <input type="email" class="input-field" placeholder="Email Address" required>
+            <form id="loginForm" onsubmit="transitionToAdmission(event)">
+                <div class="input-box">
+                    <input type="email" class="input-control" placeholder="Institutional Email" required>
                     <i class="fa-regular fa-envelope"></i>
                 </div>
-                <div class="input-group">
-                    <input type="password" class="input-field" placeholder="Password" required>
+                <div class="input-box">
+                    <input type="password" class="input-control" placeholder="Secure Password" required>
                     <i class="fa-regular fa-lock"></i>
                 </div>
-                <button type="submit" class="btn-primary">Sign In to Portal</button>
+                <button type="submit" class="btn-submit">
+                    <span>Access Portal</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
             </form>
 
-            <form id="signupForm" onsubmit="goToAdmission(event)" style="display: none;">
-                <div class="input-group">
-                    <input type="text" class="input-field" placeholder="Full Name" required>
+            <form id="signupForm" onsubmit="transitionToAdmission(event)" style="display: none;">
+                <div class="input-box">
+                    <input type="text" class="input-control" placeholder="Full Name" required>
                     <i class="fa-regular fa-user"></i>
                 </div>
-                <div class="input-group">
-                    <input type="email" class="input-field" placeholder="Email Address" required>
+                <div class="input-box">
+                    <input type="email" class="input-control" placeholder="Email Address" required>
                     <i class="fa-regular fa-envelope"></i>
                 </div>
-                <div class="input-group">
-                    <input type="password" class="input-field" placeholder="Create Password" required>
+                <div class="input-box">
+                    <input type="password" class="input-control" placeholder="Create Password" required>
                     <i class="fa-regular fa-lock"></i>
                 </div>
-                <button type="submit" class="btn-primary">Create Account</button>
+                <button type="submit" class="btn-submit">
+                    <span>Create Account</span>
+                    <i class="fa-solid fa-user-plus"></i>
+                </button>
             </form>
 
-            <div class="divider">or continue with</div>
-            <button type="button" class="btn-google" onclick="goToAdmission(event)">
+            <div class="divider-line"><span>Or secure connect</span></div>
+
+            <button type="button" class="btn-google-sso" onclick="transitionToAdmission(event)">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-                Continue with Google
+                <span>Continue with Google</span>
             </button>
         </div>
 
-        <!-- 2. ADMISSION FORM PANEL -->
-        <div id="admissionPanel" class="panel">
-            <div class="brand-header">
-                <h1>Student Admission Form</h1>
-                <p>Session: 15th August 2026 - Dec</p>
+
+        <!-- 2. STUDENT ADMISSION FORM PANEL -->
+        <div id="admissionPanel" class="card-panel">
+            <div class="header-box" style="margin-bottom: 20px;">
+                <h1 style="font-size: 20px;">Official Admission Application</h1>
+                <p>Academic Session: Aug 15, 2026 – Dec</p>
             </div>
 
-            <form onsubmit="submitAdmission(event)">
-                <div class="input-group">
-                    <input type="text" class="input-field" placeholder="Student Full Name" required>
+            <form onsubmit="handleFinalSubmission(event)">
+                <div class="input-box">
+                    <input type="text" class="input-control" placeholder="Student Full Name" required>
                     <i class="fa-regular fa-id-badge"></i>
                 </div>
-                <div class="input-group">
-                    <input type="text" class="input-field" placeholder="Father's Name" required>
+
+                <div class="input-box">
+                    <input type="text" class="input-control" placeholder="Father's Full Name" required>
                     <i class="fa-regular fa-user-tie"></i>
                 </div>
-                <div class="input-group">
-                    <select id="classSelect" class="input-field" onchange="checkGroup()" required>
-                        <option value="" disabled selected>Select Class</option>
+
+                <div class="input-box">
+                    <select id="classDropdown" class="input-control" onchange="evaluateStudyGroups()" required>
+                        <option value="" disabled selected>Select Current Class Level</option>
                         <option value="6th">Class 6th</option>
                         <option value="7th">Class 7th</option>
                         <option value="8th">Class 8th</option>
@@ -253,39 +324,52 @@
                     <i class="fa-regular fa-graduation-cap"></i>
                 </div>
 
-                <div class="input-group" id="groupDiv" style="display: none;">
-                    <select class="input-field">
-                        <option value="" disabled selected>Select Group</option>
-                        <option value="Medical">Medical</option>
-                        <option value="Engineering">Engineering</option>
+                <!-- Dynamic Study Groups (Triggered for 10th to 12th) -->
+                <div class="input-box" id="groupWrapper" style="display: none;">
+                    <select class="input-control">
+                        <option value="" disabled selected>Select Faculty/Group</option>
+                        <option value="Medical">Medical Science Group</option>
+                        <option value="Engineering">Pre-Engineering Group</option>
                     </select>
-                    <i class="fa-regular fa-book"></i>
+                    <i class="fa-regular fa-book-open"></i>
                 </div>
 
-                <div class="input-group">
-                    <div class="file-box">
-                        <input type="file" accept="image/*" required onchange="this.nextElementSibling.innerText = this.files[0].name">
-                        <span>Upload Previous Class Certificate (Image)</span>
+                <div class="input-box">
+                    <div class="upload-field">
+                        <input type="file" accept="image/*" required onchange="updateFileLabel(this, 'certLabel')">
+                        <div class="upload-text">
+                            <i class="fa-regular fa-file-arrow-up"></i>
+                            <span id="certLabel">Upload Previous Class Certificate</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="input-group" style="margin-bottom: 20px;">
-                    <div class="file-box">
-                        <input type="file" accept="image/*" required onchange="this.nextElementSibling.innerText = this.files[0].name">
-                        <span>Upload Father's CNIC Copy (Image)</span>
+                <div class="input-box">
+                    <div class="upload-field">
+                        <input type="file" accept="image/*" required onchange="updateFileLabel(this, 'cnicLabel')">
+                        <div class="upload-text">
+                            <i class="fa-regular fa-address-card"></i>
+                            <span id="cnicLabel">Upload Father's CNIC Copy</span>
+                        </div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-primary">Submit Application</button>
+                <button type="submit" class="btn-submit">
+                    <span>Submit & Proceed</span>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </form>
         </div>
+
     </div>
 
     <script>
-        function switchTab(tab, e) {
-            document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+        // Toggle between Sign In and Register tabs smoothly
+        function switchAuthTab(type, e) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             e.target.classList.add('active');
-            if(tab === 'login') {
+            
+            if(type === 'login') {
                 document.getElementById('loginForm').style.display = 'block';
                 document.getElementById('signupForm').style.display = 'none';
             } else {
@@ -294,26 +378,37 @@
             }
         }
 
-        function goToAdmission(e) {
+        // Transition from Auth to Admission Panel
+        function transitionToAdmission(e) {
             e.preventDefault();
             document.getElementById('authPanel').classList.remove('active');
             document.getElementById('admissionPanel').classList.add('active');
         }
 
-        function checkGroup() {
-            let cls = document.getElementById('classSelect').value;
-            let groupDiv = document.getElementById('groupDiv');
-            if(['10th', '11th', '12th'].includes(cls)) {
-                groupDiv.style.display = 'block';
+        // Show Medical/Engineering options dynamically for classes 10th to 12th
+        function evaluateStudyGroups() {
+            const selectedClass = document.getElementById('classDropdown').value;
+            const groupWrapper = document.getElementById('groupWrapper');
+            
+            if(['10th', '11th', '12th'].includes(selectedClass)) {
+                groupWrapper.style.display = 'block';
             } else {
-                groupDiv.style.display = 'none';
+                groupWrapper.style.display = 'none';
             }
         }
 
-        function submitAdmission(e) {
+        // Reflect file names dynamically inside custom upload boxes
+        function updateFileLabel(inputElement, labelId) {
+            if(inputElement.files && inputElement.files[0]) {
+                document.getElementById(labelId).textContent = inputElement.files[0].name;
+            }
+        }
+
+        // Final Submission handler & STBB redirect
+        function handleFinalSubmission(e) {
             e.preventDefault();
-            alert("Application submitted successfully! Notification sent to kingbozdarjan@gmail.com. Redirecting to STBB...");
-            window.location.href = "https://www.stbb.com.pk";
+            alert("Application successfully submitted! Notification dispatched to kingbozdarjan@gmail.com. Redirecting to STBB E-Books portal...");
+            window.location.href = "https://ebooks.stbb.edu.pk/";
         }
     </script>
 </body>
