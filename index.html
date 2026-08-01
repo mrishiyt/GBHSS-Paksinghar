@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Firebase Compatibility SDKs -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
@@ -187,23 +187,26 @@
 
             <div class="header-box" style="margin-bottom: 20px;">
                 <h1 style="font-size: 20px;">Official Admission Application</h1>
-                <p>Academic Session: Aug 15, 2026 – Dec</p>
+                <p>Academic Session 2026-2027</p>
             </div>
 
-            <form onsubmit="handleFinalSubmission(event)">
+            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" onsubmit="handleFinalSubmission(event)">
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                <input type="hidden" name="subject" value="New Admission Submission - GBHSS Paksinghar">
+
                 <div class="input-box">
                     <i class="fa-regular fa-id-badge left-icon"></i>
-                    <input type="text" class="input-control" placeholder="Student Full Name" required>
+                    <input type="text" name="Student Name" class="input-control" placeholder="Student Full Name" required>
                 </div>
 
                 <div class="input-box">
                     <i class="fa-regular fa-user-tie left-icon"></i>
-                    <input type="text" class="input-control" placeholder="Father's Full Name" required>
+                    <input type="text" name="Father Name" class="input-control" placeholder="Father's Full Name" required>
                 </div>
 
                 <div class="input-box">
                     <i class="fa-regular fa-graduation-cap left-icon"></i>
-                    <select id="classDropdown" class="input-control" onchange="evaluateStudyGroups()" required>
+                    <select id="classDropdown" name="Class Level" class="input-control" onchange="evaluateStudyGroups()" required>
                         <option value="" disabled selected>Select Current Class Level</option>
                         <option value="6th">Class 6th</option>
                         <option value="7th">Class 7th</option>
@@ -217,7 +220,7 @@
 
                 <div class="input-box" id="groupWrapper" style="display: none;">
                     <i class="fa-regular fa-book-open left-icon"></i>
-                    <select class="input-control">
+                    <select name="Faculty Group" class="input-control">
                         <option value="" disabled selected>Select Faculty/Group</option>
                         <option value="Medical">Medical Science Group</option>
                         <option value="Engineering">Pre-Engineering Group</option>
@@ -226,7 +229,7 @@
 
                 <div class="input-box">
                     <div class="upload-field">
-                        <input type="file" accept="image/*" required onchange="updateFileLabel(this, 'certLabel')">
+                        <input type="file" name="Previous Certificate" accept="image/*" required onchange="updateFileLabel(this, 'certLabel')">
                         <div class="upload-text">
                             <i class="fa-regular fa-file-arrow-up"></i>
                             <span id="certLabel">Upload Previous Class Certificate</span>
@@ -236,7 +239,7 @@
 
                 <div class="input-box">
                     <div class="upload-field">
-                        <input type="file" accept="image/*" required onchange="updateFileLabel(this, 'cnicLabel')">
+                        <input type="file" name="Father CNIC" accept="image/*" required onchange="updateFileLabel(this, 'cnicLabel')">
                         <div class="upload-text">
                             <i class="fa-regular fa-address-card"></i>
                             <span id="cnicLabel">Upload Father's CNIC Copy</span>
@@ -258,7 +261,7 @@
                     <i class="fa-solid fa-check"></i>
                 </div>
                 <h1 style="font-size: 22px; color: #fff; margin-bottom: 8px;">Application Submitted!</h1>
-                <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 24px;">Your admission request has been successfully recorded on the portal database.</p>
+                <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 24px;">Your application has been received and sent directly to the administration email.</p>
                 <button type="button" class="btn-submit" onclick="switchPage('authPanel', document.querySelector('.nav-btn'))">
                     <span>Return to Home</span>
                     <i class="fa-solid fa-house"></i>
@@ -313,7 +316,6 @@
     </div>
 
     <script>
-        // --- YOUR REAL FIREBASE CONFIGURATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyATuM-m_qFZXzT4zKuBWT8Ct0_0xRmF86Q",
             authDomain: "gbhss-portal.firebaseapp.com",
@@ -324,12 +326,10 @@
             measurementId: "G-JLHJ518QLS"
         };
         
-        // Initialize Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
 
-        // --- REAL SIGNUP FUNCTION ---
         function handleRealRegister(e) {
             e.preventDefault();
             const email = document.getElementById('regEmail').value;
@@ -337,7 +337,7 @@
 
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    alert("Account Successfully Created on Firebase!");
+                    alert("Account Successfully Created!");
                     transitionToAdmission();
                 })
                 .catch((error) => {
@@ -345,7 +345,6 @@
                 });
         }
 
-        // --- REAL LOGIN FUNCTION ---
         function handleRealLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
@@ -353,7 +352,7 @@
 
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    alert("Welcome! Login Successful.");
+                    alert("Login Successful!");
                     transitionToAdmission();
                 })
                 .catch((error) => {
@@ -361,7 +360,6 @@
                 });
         }
 
-        // UI Navigation
         function switchPage(panelId, btnElement) {
             document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -420,9 +418,10 @@
         }
 
         function handleFinalSubmission(e) {
-            e.preventDefault();
-            document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
-            document.getElementById('successPanel').classList.add('active');
+            setTimeout(() => {
+                document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
+                document.getElementById('successPanel').classList.add('active');
+            }, 1000);
         }
     </script>
 </body>
