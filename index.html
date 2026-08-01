@@ -3,119 +3,649 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBHSS Paksinghar - Official Portal</title>
+    <title>GBHSS Paksinghar - Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* General Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --accent: #38bdf8;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Main Login Box */
-        .login-container {
-            background: #fff;
-            padding: 40px 50px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        /* Dynamic High-End Background Effect */
+        .bg-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(2, 132, 199, 0.25) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.8) 0px, transparent 100%);
+            z-index: -1;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(56, 189, 248, 0.05));
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulseGlow 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9) translate(-20px, -20px); }
+            100% { transform: scale(1.1) translate(20px, 20px); }
+        }
+
+        /* App Container Layout */
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        /* Card Panels with Glassmorphism */
+        .panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: absolute;
+            width: calc(100% - 40px);
+            max-width: 480px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px) scale(0.98);
+        }
+
+        .panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .panel.exit {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.98);
+        }
+
+        /* Header UI Branding */
+        .brand-header {
             text-align: center;
-            width: 100%;
-            max-width: 400px;
-            animation: fadeIn 1s ease-in-out;
+            margin-bottom: 32px;
         }
 
-        /* School Logo/Name Area */
-        .school-header img {
-            width: 80px; /* School Logo Placeholder */
-            margin-bottom: 15px;
-        }
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-        p {
-            color: #777;
-            margin-bottom: 30px;
-            font-size: 15px;
+        .emblem-badge {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(56, 189, 248, 0.1));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.3);
+            animation: floatBadge 4s ease-in-out infinite;
         }
 
-        /* Google Login Button */
-        .google-btn {
-            background-color: #4285F4;
-            color: white;
-            width: 100%;
-            padding: 15px;
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .emblem-badge img {
+            width: 40px;
+            height: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .brand-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .brand-header p {
+            font-size: 13.5px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Tab Switcher (Login / Signup) */
+        .auth-switch {
+            display: flex;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 4px;
+            margin-bottom: 28px;
+        }
+
+        .switch-btn {
+            flex: 1;
+            padding: 11px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            background: transparent;
+            color: var(--gray);
             font-weight: 600;
+            font-size: 13.5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .switch-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+        }
+
+        /* Form Layout Elements */
+        .input-group {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 13px 16px 13px 46px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            background: rgba(2, 132, 199, 0.05);
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+        }
+
+        .input-field:focus + i, .input-field:not(:placeholder-shown) + i {
+            color: var(--accent);
+        }
+
+        /* Custom Dropdowns & File Inputs */
+        select.input-field {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        select.input-field option {
+            background: var(--dark);
+            color: #ffffff;
+        }
+
+        .file-upload-box {
+            border: 1.5px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .file-upload-box:hover {
+            border-color: var(--primary);
+            background: rgba(2, 132, 199, 0.03);
+        }
+
+        .file-upload-box input[type="file"] {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-text {
+            font-size: 13px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .file-upload-text i {
+            color: var(--accent);
+            font-size: 16px;
+        }
+
+        /* Primary Action Button */
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+            transition: var(--transition);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(2, 132, 199, 0.45);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 22px 0;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .divider span {
+            padding: 0 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Google SSO Button Style */
+        .btn-google {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s, transform 0.2s;
-            text-decoration: none; /* Link ko button jaisa banane ke liye */
+            gap: 12px;
+            transition: var(--transition);
         }
-        .google-btn:hover {
-            background-color: #357ae8;
+
+        .btn-google:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
-        .google-icon {
-            margin-right: 15px;
-            background: white;
-            padding: 5px;
-            border-radius: 4px;
+
+        .btn-google img {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Scrollbar aesthetics inside panels */
+        .panel::-webkit-scrollbar {
+            width: 5px;
+        }
+        .panel::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        /* Success State Animation */
+        .success-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 2px solid #10b981;
+            color: #10b981;
+            border-radius: 50%;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+            animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Footer Text */
-        .footer-text {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #aaa;
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .success-screen h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
         }
 
-        /* Responsive */
-        @media (max-width: 500px) {
-            .login-container { padding: 30px 20px; }
+        .success-screen p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-height: 750px) {
+            .panel {
+                max-height: 85vh;
+                overflow-y: auto;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="school-header">
-            <!-- Yahan aap apne school ki photo ka link laga sakte hain -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Sindh Govt Logo">
-            <h2>GBHSS Paksinghar</h2>
-            <p>Student Admission Portal 2026-27</p>
+    <div class="bg-mesh"></div>
+    <div class="ambient-glow"></div>
+
+    <div class="app-container">
+
+        <!-- 1. AUTH PANEL (LOGIN & SIGNUP TOGGLE) -->
+        <div id="authPanel" class="panel active">
+            <div class="brand-header">
+                <div class="emblem-badge">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Emblem">
+                </div>
+                <h1>GBHSS Paksinghar</h1>
+                <p>Institutional Admission & Secure Portal</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="auth-switch">
+                <button class="switch-btn active" onclick="switchTab('login')">Sign In</button>
+                <button class="switch-btn" onclick="switchTab('signup')">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <input type="email" class="input-field" placeholder="Institutional Email Address" required>
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" class="input-field" placeholder="Secure Password" required>
+                    <i class="fa-regular fa-lock"></i>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span>Access Portal</span>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </button>
+            </form>
+
+            <!-- Signup Form (Hidden by default) -->
+            <form id="signupForm" onsubmit="handleSignup(event)" style="display: none;">
+                <div class="input-group">
+                    <input type="text" class="input-field" placeholder="Full Name" required>
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div class="input-group">
+                    <input type="email" class="input-field" placeholder="Email Address" required>
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" class="input-field" placeholder="Create Password" required>
+                    <i class="fa-regular fa-lock"></i>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span>Create Account</span>
+                    <i class="fa-solid fa-user-plus"></i>
+                </button>
+            </form>
+
+            <div class="divider"><span>Or continue with</span></div>
+
+            <!-- Google SSO Integration Button -->
+            <button type="button" class="btn-google" onclick="triggerGoogleSSO()">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                <span>Continue with Google</span>
+            </button>
         </div>
 
-        <!-- Asli Google Login abhi backend setup maangta hai, 
-             filhal yeh button dashboard.html par le kar jayega -->
-        <a href="dashboard.html" class="google-btn">
-            <span class="google-icon">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.4 1.2 8.8 3.3l6.6-6.6C34.2 3 29.4 0 24 0 14.8 0 7.1 6.1 4.1 14.4l6.8 5.3C12.8 13.6 18.2 9.5 24 9.5z"/><path fill="#4285F4" d="M46.9 24.5c0-1.7-.1-3.4-.4-5H24v10h12.6c-.6 3.3-2.4 6-5.1 7.8l6.9 5.3c4-3.7 6.3-9.1 6.3-15.6z"/><path fill="#FBBC05" d="M10.9 28.1c-1.3-3.6-1.3-7.5 0-11.1l-6.8-5.3C1.8 15.2 0 19.5 0 24s1.8 8.8 4.1 12.3l6.8-5.3z"/><path fill="#34A853" d="M24 48c6.5 0 12-2.2 16-6l-6.9-5.3c-2.2 1.5-5 2.4-9.1 2.4-5.8 0-11.2-4-13.1-9.4l-6.8 5.3C7.1 41.9 14.8 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
-            </span>
-            Continue with Google
-        </a>
 
-        <div class="footer-text">
-            Powered by GBHSS Paksinghar IT Dept | Managed on GitHub
+        <!-- 2. DYNAMIC ADMISSION FORM PANEL -->
+        <div id="admissionPanel" class="panel">
+            <div class="brand-header" style="margin-bottom: 20px;">
+                <h1 style="font-size: 20px;">Student Admission Application</h1>
+                <p>Academic Session (August 15, 2026 - Dec)</p>
+            </div>
+
+            <form id="admissionForm" onsubmit="handleAdmissionSubmit(event)">
+                <div class="input-group">
+                    <input type="text" id="fullName" class="input-field" placeholder="Student Full Name" required>
+                    <i class="fa-regular fa-id-badge"></i>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="fatherName" class="input-field" placeholder="Father's Full Name" required>
+                    <i class="fa-regular fa-user-tie"></i>
+                </div>
+
+                <div class="input-group">
+                    <select id="studentClass" class="input-field" onchange="toggleStudyGroups()" required>
+                        <option value="" disabled selected>Select Current Class Level</option>
+                        <option value="6th">Class 6th</option>
+                        <option value="7th">Class 7th</option>
+                        <option value="8th">Class 8th</option>
+                        <option value="9th">Class 9th</option>
+                        <option value="10th">Class 10th</option>
+                        <option value="11th">Class 11th</option>
+                        <option value="12th">Class 12th</option>
+                    </select>
+                    <i class="fa-regular fa-graduation-cap"></i>
+                </div>
+
+                <!-- Dynamic Study Groups (Triggered for 10th to 12th) -->
+                <div class="input-group" id="groupContainer" style="display: none;">
+                    <select id="studyGroup" class="input-field">
+                        <option value="" disabled selected>Select Faculty/Group</option>
+                        <option value="Medical">Medical Science Group</option>
+                        <option value="Engineering">Pre-Engineering Group</option>
+                    </select>
+                    <i class="fa-regular fa-book-open"></i>
+                </div>
+
+                <div class="input-group">
+                    <div class="file-upload-box">
+                        <input type="file" id="certificateFile" accept="image/*" required onchange="updateFileName(this, 'certText')">
+                        <div class="file-upload-text">
+                            <i class="fa-regular fa-file-arrow-up"></i>
+                            <span id="certText">Upload Previous Class Certificate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="file-upload-box">
+                        <input type="file" id="cnicFile" accept="image/*" required onchange="updateFileName(this, 'cnicText')">
+                        <div class="file-upload-text">
+                            <i class="fa-regular fa-address-card"></i>
+                            <span id="cnicText">Upload Father's CNIC Image</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <span>Submit Official Application</span>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
         </div>
+
+
+        <!-- 3. SUCCESS REDIRECT PANEL -->
+        <div id="successPanel" class="panel">
+            <div class="success-screen">
+                <div class="success-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3>Application Submitted!</h3>
+                <p>Your admission form has been securely transmitted to the administration office at <strong>kingbozdarjan@gmail.com</strong>.<br><br>Upon approval notification, classes commence on <strong>15th August 2026</strong>.</p>
+                <button type="button" class="btn-primary" onclick="redirectToSTBB()">
+                    <span>Proceed to STBB Portal</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+            </div>
+        </div>
+
     </div>
 
+    <script>
+        // Tab switching controller
+        function switchTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const btns = document.querySelectorAll('.switch-btn');
+
+            btns.forEach(b => b.classList.remove('active'));
+
+            if(tab === 'login') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                event.target.classList.add('active');
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                event.target.classList.add('active');
+            }
+        }
+
+        // Transition panel effects
+        function transitionPanel(hideId, showId) {
+            const hideEl = document.getElementById(hideId);
+            const showEl = document.getElementById(showId);
+
+            hideEl.classList.add('exit');
+            setTimeout(() => {
+                hideEl.classList.remove('active', 'exit');
+                showEl.classList.add('active');
+            }, 300);
+        }
+
+        // Simulate Google SSO & Authentication Sequence
+        function handleLogin(e) {
+            e.preventDefault();
+            transitionPanel('authPanel', 'admissionPanel');
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            transitionPanel('authPanel', 'admissionPanel');
+        }
+
+        function triggerGoogleSSO() {
+            // High-end simulated SSO confirmation feedback
+            const btn = document.querySelector('.btn-google');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Authenticating Account...`;
+            setTimeout(() => {
+                transitionPanel('authPanel', 'admissionPanel');
+            }, 800);
+        }
+
+        // Dynamic Study Group Logic for Classes 10th to 12th
+        function toggleStudyGroups() {
+            const selectedClass = document.getElementById('studentClass').value;
+            const groupContainer = document.getElementById('groupContainer');
+            
+            if(['10th', '11th', '12th'].includes(selectedClass)) {
+                groupContainer.style.display = 'block';
+                document.getElementById('studyGroup').setAttribute('required', 'true');
+            } else {
+                groupContainer.style.display = 'none';
+                document.getElementById('studyGroup').removeAttribute('required');
+            }
+        }
+
+        // Update file label text dynamically when selected
+        function updateFileName(input, targetId) {
+            if(input.files && input.files[0]) {
+                document.getElementById(targetId).textContent = input.files[0].name;
+            }
+        }
+
+        // Final Admission Form Submission Handler
+        function handleAdmissionSubmit(e) {
+            e.preventDefault();
+            transitionPanel('admissionPanel', 'successPanel');
+        }
+
+        // Redirect to Sindh Textbook Board Portal
+        function redirectToSTBB() {
+            window.location.href = "https://www.stbb.com.pk";
+        }
+    </script>
 </body>
 </html>
