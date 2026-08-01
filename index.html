@@ -78,9 +78,8 @@
         select.input-control { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
         select.input-control option { background: #0f172a; color: #fff; }
 
-        .upload-field { border: 1.5px dashed rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 14px; text-align: center; background: rgba(255, 255, 255, 0.01); position: relative; cursor: pointer; transition: var(--transition); }
-        .upload-field input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 3; }
-        .upload-text { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .notice-box { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 12.5px; color: var(--accent); line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+        .notice-box i { font-size: 15px; margin-top: 2px; }
 
         .btn-submit { width: 100%; background: linear-gradient(135deg, var(--primary), #3b82f6); color: #fff; border: none; padding: 14px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); transition: var(--transition); margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-submit:hover { transform: translateY(-2px); }
@@ -94,8 +93,8 @@
 
         .content-body { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
         .content-body h3 { color: #fff; font-size: 16px; margin-bottom: 8px; margin-top: 16px; }
-        .info-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 14px; border-radius: 12px; margin-top: 12px; display: flex; align-items: center; gap: 12px; color: #fff; }
-        .info-card i { color: var(--accent); }
+        .info-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 14px; border-radius: 12px; margin-top: 12px; display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; }
+        .info-card i { color: var(--accent); font-size: 18px; }
     </style>
 </head>
 <body>
@@ -190,9 +189,14 @@
                 <p>Academic Session 2026-2027</p>
             </div>
 
-            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" onsubmit="handleFinalSubmission(event)">
+            <div class="notice-box">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Note: Is online form ko submit karne ke baad, student ko apnay **original documents aur certificates school mein khud jama karwane honge** tab admission confirm hoga.</span>
+            </div>
+
+            <form action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFinalSubmission(event)">
                 <input type="hidden" name="access_key" value="e9d35778-e497-436a-9f2f-370d78211467">
-                <input type="hidden" name="subject" value="New Admission Submission - GBHSS Paksinghar">
+                <input type="hidden" name="subject" value="New Admission Application Received - GBHSS Paksinghar">
 
                 <div class="input-box">
                     <i class="fa-regular fa-id-badge left-icon"></i>
@@ -202,6 +206,16 @@
                 <div class="input-box">
                     <i class="fa-regular fa-user-tie left-icon"></i>
                     <input type="text" name="Father Name" class="input-control" placeholder="Father's Full Name" required>
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-regular fa-envelope left-icon"></i>
+                    <input type="email" name="Student Email" class="input-control" placeholder="Student / Contact Email" required>
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-regular fa-phone left-icon"></i>
+                    <input type="tel" name="Contact Phone" class="input-control" placeholder="Contact Mobile Number (e.g. 03443607020)" required>
                 </div>
 
                 <div class="input-box">
@@ -227,26 +241,6 @@
                     </select>
                 </div>
 
-                <div class="input-box">
-                    <div class="upload-field">
-                        <input type="file" name="Previous Certificate" accept="image/*" required onchange="updateFileLabel(this, 'certLabel')">
-                        <div class="upload-text">
-                            <i class="fa-regular fa-file-arrow-up"></i>
-                            <span id="certLabel">Upload Previous Class Certificate</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-box">
-                    <div class="upload-field">
-                        <input type="file" name="Father CNIC" accept="image/*" required onchange="updateFileLabel(this, 'cnicLabel')">
-                        <div class="upload-text">
-                            <i class="fa-regular fa-address-card"></i>
-                            <span id="cnicLabel">Upload Father's CNIC Copy</span>
-                        </div>
-                    </div>
-                </div>
-
                 <button type="submit" class="btn-submit">
                     <span>Submit Application</span>
                     <i class="fa-solid fa-paper-plane"></i>
@@ -261,7 +255,7 @@
                     <i class="fa-solid fa-check"></i>
                 </div>
                 <h1 style="font-size: 22px; color: #fff; margin-bottom: 8px;">Application Submitted!</h1>
-                <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 24px;">Your application has been received and sent directly to the administration email.</p>
+                <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 24px;">Aapka form successfully email par bhej diya gaya hai. Barah-e-karam apne documents lekar school tashreef layein.</p>
                 <button type="button" class="btn-submit" onclick="switchPage('authPanel', document.querySelector('.nav-btn'))">
                     <span>Return to Home</span>
                     <i class="fa-solid fa-house"></i>
@@ -290,12 +284,14 @@
                 <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80" alt="Library">
             </div>
             <div class="header-box">
-                <h1>Get In Touch</h1>
-                <p>We are here to help and answer any questions you might have</p>
+                <h1>Get In Touch & Location</h1>
+                <p>Connect with school management directly</p>
             </div>
             <div class="content-body">
-                <div class="info-card"><i class="fa-solid fa-location-dot"></i><span>GBHSS Paksinghar, Sindh, Pakistan</span></div>
-                <div class="info-card"><i class="fa-solid fa-envelope"></i><span>kingbozdarjan@gmail.com</span></div>
+                <div class="info-card"><i class="fa-solid fa-location-dot"></i><span><strong>Location:</strong> GBHSS Paksinghar, Sindh, Pakistan</span></div>
+                <a href="tel:03443607020" class="info-card"><i class="fa-solid fa-phone"></i><span><strong>Call Us:</strong> 03443607020</span></a>
+                <a href="https://wa.me/923700715868" target="_blank" class="info-card"><i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i><span><strong>WhatsApp:</strong> 03700715868</span></a>
+                <a href="mailto:kingbozdarjan@gmail.com" class="info-card"><i class="fa-solid fa-envelope"></i><span><strong>Email:</strong> kingbozdarjan@gmail.com</span></a>
             </div>
         </div>
 
@@ -409,12 +405,6 @@
         function evaluateStudyGroups() {
             const selectedClass = document.getElementById('classDropdown').value;
             document.getElementById('groupWrapper').style.display = ['10th', '11th', '12th'].includes(selectedClass) ? 'block' : 'none';
-        }
-
-        function updateFileLabel(inputElement, labelId) {
-            if(inputElement.files && inputElement.files[0]) {
-                document.getElementById(labelId).textContent = inputElement.files[0].name;
-            }
         }
 
         function handleFinalSubmission(e) {
