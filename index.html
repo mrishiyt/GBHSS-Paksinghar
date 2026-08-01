@@ -194,9 +194,12 @@
                 <span>Note: Is online form ko submit karne ke baad, student ko apnay **original documents aur certificates school mein khud jama karwane honge** tab admission confirm hoga.</span>
             </div>
 
-            <form action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFinalSubmission(event)">
+            <!-- Direct Web3Forms submission setup -->
+            <form action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="e9d35778-e497-436a-9f2f-370d78211467">
-                <input type="hidden" name="subject" value="New Admission Application Received - GBHSS Paksinghar">
+                <input type="hidden" name="subject" value="New Admission Application - GBHSS Paksinghar">
+                <!-- Redirect back to page success state or show message -->
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
 
                 <div class="input-box">
                     <i class="fa-regular fa-id-badge left-icon"></i>
@@ -405,13 +408,6 @@
         function evaluateStudyGroups() {
             const selectedClass = document.getElementById('classDropdown').value;
             document.getElementById('groupWrapper').style.display = ['10th', '11th', '12th'].includes(selectedClass) ? 'block' : 'none';
-        }
-
-        function handleFinalSubmission(e) {
-            setTimeout(() => {
-                document.querySelectorAll('.card-panel').forEach(panel => panel.classList.remove('active'));
-                document.getElementById('successPanel').classList.add('active');
-            }, 1000);
         }
     </script>
 </body>
