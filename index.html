@@ -46,20 +46,15 @@
             z-index: -1;
         }
 
-        /* Smooth entrance animation from bottom */
         @keyframes floatUpFromBottom {
             0% { opacity: 0; transform: translateY(50px) scale(0.97); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .animate-up {
-            animation: floatUpFromBottom 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
+        .animate-up { animation: floatUpFromBottom 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-1 { animation-delay: 0.1s; opacity: 0; }
         .delay-2 { animation-delay: 0.25s; opacity: 0; }
 
-        /* Navigation Header */
         nav { 
             width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; 
             padding: 24px 20px; z-index: 10; 
@@ -68,20 +63,16 @@
         .nav-logo img { width: 38px; height: auto; filter: drop-shadow(0 4px 12px rgba(59,130,246,0.4)); }
         
         .nav-actions { display: flex; gap: 12px; align-items: center; }
-        
         .nav-btn {
             background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); color: var(--text-muted);
             padding: 10px 18px; border-radius: 12px; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: var(--transition);
         }
         .nav-btn:hover { background: rgba(255, 255, 255, 0.08); color: #fff; border-color: rgba(255,255,255,0.2); }
-
         .nav-btn.primary-cta {
             background: linear-gradient(135deg, var(--primary), #2563eb); color: #fff; border: none;
             box-shadow: 0 4px 20px rgba(59,130,246,0.4);
         }
-        .nav-btn.primary-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59,130,246,0.6); }
 
-        /* Main Container Wrapper */
         .wrapper { width: 100%; max-width: 900px; padding: 10px 20px 60px; z-index: 1; margin: auto; }
 
         .card-panel {
@@ -97,7 +88,6 @@
 
         .school-banner { width: 100%; height: 210px; border-radius: 18px; overflow: hidden; margin-bottom: 26px; border: 1px solid var(--border-color); position: relative; }
         .school-banner img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .school-banner:hover img { transform: scale(1.06); }
         .banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,10,18,0.85), rgba(7,10,18,0.2)); }
         
         .banner-badge {
@@ -106,7 +96,6 @@
             border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase;
         }
 
-        /* Engaging Interactive Showcase Grid */
         .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px; }
         .showcase-card {
             background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 18px; padding: 20px;
@@ -116,13 +105,6 @@
         .showcase-card i { font-size: 24px; color: var(--accent); margin-bottom: 12px; }
         .showcase-card h4 { font-size: 14.5px; font-weight: 700; color: #fff; margin-bottom: 6px; }
         .showcase-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
-
-        .notice-box { 
-            background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.18); 
-            padding: 16px 20px; border-radius: 16px; margin-bottom: 24px; font-size: 13.5px; color: var(--accent); 
-            line-height: 1.5; display: flex; gap: 14px; align-items: flex-start; 
-        }
-        .notice-box i { font-size: 18px; margin-top: 2px; }
 
         .input-box { position: relative; margin-bottom: 20px; }
         .input-box > i.left-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 15px; pointer-events: none; z-index: 2; }
@@ -135,7 +117,7 @@
         .btn-submit { width: 100%; background: linear-gradient(135deg, var(--primary), #2563eb); color: #fff; border: none; padding: 16px; border-radius: 14px; font-weight: 700; font-size: 15.5px; cursor: pointer; box-shadow: 0 8px 25px rgba(59,130,246,0.4); transition: var(--transition); margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(59,130,246,0.6); }
 
-        /* AUTH GATE MODAL OVERLAY */
+        /* AUTH MODAL OVERLAY */
         .auth-modal-overlay {
             position: fixed; inset: 0; background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             z-index: 100; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s ease;
@@ -164,32 +146,20 @@
         .divider-line span { padding: 0 12px; }
 
         .btn-google-sso { width: 100%; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); color: #fff; padding: 14px; border-radius: 14px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; transition: var(--transition); }
-        .btn-google-sso:hover { background: rgba(255, 255, 255, 0.08); }
-        .btn-google-sso img { width: 18px; height: 18px; }
-
         .toggle-password { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; font-size: 15px; z-index: 10; padding: 5px; }
         .forgot-row { display: flex; justify-content: flex-end; margin-top: -6px; margin-bottom: 18px; }
         .forgot-link { font-size: 12.5px; color: var(--accent); text-decoration: none; font-weight: 600; cursor: pointer; background: none; border: none; }
-        .forgot-link:hover { text-decoration: underline; }
 
-        /* Success Card Screen */
+        #otpCodeInputBox { letter-spacing: 8px; text-align: center; font-size: 20px; font-weight: 800; }
+
         #successCard { text-align: center; padding: 20px 10px; display: none; }
-        #successCard i { font-size: 60px; color: #22c55e; margin-bottom: 20px; animation: bounceIn 0.8s ease; }
-        #successCard h2 { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; }
-        #successCard p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0); opacity: 0; }
-            60% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
+        #successCard i { font-size: 60px; color: #22c55e; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
     <div class="ambient-bg"></div>
 
-    <!-- Navigation Bar -->
     <nav class="animate-up delay-1">
         <div class="nav-logo" onclick="location.reload()">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Emblem_of_Sindh.svg/1200px-Emblem_of_Sindh.svg.png" alt="Logo">
@@ -201,10 +171,7 @@
         </div>
     </nav>
 
-    <!-- Main Container Wrapper -->
     <div class="wrapper">
-
-        <!-- WELCOME & ADMISSION PANEL -->
         <div id="mainPortalPanel" class="card-panel active animate-up delay-2">
             <div class="school-banner">
                 <div class="banner-overlay"></div>
@@ -217,52 +184,41 @@
                 <p>Explore our portal or submit your admission application below</p>
             </div>
 
-            <!-- Engaging Viewer Showcase Cards -->
             <div class="showcase-grid">
-                <div class="showcase-card" onclick="alert('Explore Campus: State-of-the-art labs, digital library & sports complex.')">
+                <div class="showcase-card" onclick="alert('Campus Life')">
                     <i class="fa-solid fa-school-flag"></i>
                     <h4>Campus Life</h4>
                     <p>Modern facilities & vibrant student environment.</p>
                 </div>
-                <div class="showcase-card" onclick="alert('Academic Excellence: Expert faculty & top-tier curriculum results.')">
+                <div class="showcase-card" onclick="alert('Academics')">
                     <i class="fa-solid fa-award"></i>
                     <h4>Academics</h4>
                     <p>Rigorous learning & professional mentorship.</p>
                 </div>
-                <div class="showcase-card" onclick="alert('24/7 Support: Contact administration directly for guidance.')">
+                <div class="showcase-card" onclick="alert('Support')">
                     <i class="fa-solid fa-headset"></i>
                     <h4>Support</h4>
                     <p>Active assistance for students and parents.</p>
                 </div>
             </div>
 
-            <div class="notice-box">
-                <i class="fa-solid fa-circle-info"></i>
-                <span><strong>Viewer Notice:</strong> Aap website ko freely browse kar sakte hain. Form submit karne par system authentication (Login/Signup) maangega.</span>
-            </div>
-
-            <!-- Admission Form -->
             <form id="admissionForm" onsubmit="handleFormSubmissionAttempt(event)">
                 <div class="input-box">
                     <i class="fa-regular fa-id-badge left-icon"></i>
                     <input type="text" id="admStudentName" class="input-control" placeholder="Student Full Name" required>
                 </div>
-
                 <div class="input-box">
                     <i class="fa-regular fa-user-tie left-icon"></i>
                     <input type="text" id="admFatherName" class="input-control" placeholder="Father's Full Name" required>
                 </div>
-
                 <div class="input-box">
                     <i class="fa-regular fa-envelope left-icon"></i>
                     <input type="email" id="admEmail" class="input-control" placeholder="Contact Email Address" required>
                 </div>
-
                 <div class="input-box">
                     <i class="fa-regular fa-phone left-icon"></i>
-                    <input type="tel" id="admPhone" class="input-control" placeholder="Contact Mobile Number (e.g. 03443607020)" required>
+                    <input type="tel" id="admPhone" class="input-control" placeholder="Contact Mobile Number" required>
                 </div>
-
                 <div class="input-box">
                     <i class="fa-regular fa-graduation-cap left-icon"></i>
                     <select id="classDropdown" class="input-control" onchange="evaluateStudyGroups()" required>
@@ -276,7 +232,6 @@
                         <option value="12th">Class 12th</option>
                     </select>
                 </div>
-
                 <div class="input-box" id="groupWrapper" style="display: none;">
                     <i class="fa-regular fa-book-open left-icon"></i>
                     <select id="admGroup" class="input-control">
@@ -285,37 +240,33 @@
                         <option value="Engineering">Pre-Engineering Group</option>
                     </select>
                 </div>
-
                 <button type="submit" class="btn-submit">
                     <span>Submit Admission Application</span>
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
             </form>
 
-            <!-- Success Card View -->
             <div id="successCard">
                 <i class="fa-solid fa-circle-check"></i>
                 <h2>Application Submitted Successfully!</h2>
-                <p>Aapka admission form successfully record ho gaya hai. Hum jald hi aapke diye gaye number par rabta karenge.</p>
+                <p>Aapka admission form successfully record ho gaya hai.</p>
                 <button type="button" class="btn-submit" onclick="resetPortalView()" style="max-width: 240px; margin: 0 auto;">
                     <span>Explore More</span>
                 </button>
             </div>
         </div>
-
     </div>
 
-    <!-- AUTH GATE & FORGOT PASSWORD MODAL (All in One Page) -->
+    <!-- AUTH & OTP MODAL -->
     <div id="authModalOverlay" class="auth-modal-overlay">
         <div class="auth-modal-card">
-            <div class="modal-close-btn" onclick="closeAuthModal()" title="Close"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modal-close-btn" onclick="closeAuthModal()"><i class="fa-solid fa-xmark"></i></div>
             
             <div class="header-box" style="margin-bottom: 22px;">
-                <h1 id="modalTitle" style="font-size: 21px;">Authentication Required</h1>
+                <h1 id="modalTitle">Authentication Required</h1>
                 <p id="modalSub">Admission submit karne ke liye sign in ya register karein.</p>
             </div>
 
-            <!-- Tab Switcher (Login / Register) -->
             <div id="tabSwitcherBox" class="tab-switcher">
                 <button class="tab-btn active" onclick="switchAuthTab('login')">Sign In</button>
                 <button class="tab-btn" onclick="switchAuthTab('signup')">Register</button>
@@ -332,11 +283,9 @@
                     <input type="password" id="loginPass" class="input-control" placeholder="Password" required>
                     <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('loginPass', this)"></i>
                 </div>
-                
                 <div class="forgot-row">
                     <button type="button" class="forgot-link" onclick="switchToForgotMode()">Forgot Password?</button>
                 </div>
-
                 <button type="submit" class="btn-submit">
                     <span>Sign In & Submit Application</span>
                     <i class="fa-solid fa-arrow-right"></i>
@@ -364,16 +313,34 @@
                 </button>
             </form>
 
-            <!-- Forgot Password Form (Directly inside same modal - No page change) -->
-            <form id="modalForgotForm" onsubmit="handleForgotPassword(event)" style="display: none;">
-                <div class="input-box">
-                    <i class="fa-regular fa-envelope left-icon"></i>
-                    <input type="email" id="forgotEmail" class="input-control" placeholder="Enter your registered email" required>
+            <!-- AUTOMATIC 4-DIGIT OTP FORGOT PASSWORD FORM -->
+            <form id="modalForgotForm" onsubmit="handleSendOTP(event)" style="display: none;">
+                <div id="step1_EmailBox">
+                    <div class="input-box">
+                        <i class="fa-regular fa-envelope left-icon"></i>
+                        <input type="email" id="forgotEmail" class="input-control" placeholder="Enter your registered email" required>
+                    </div>
+                    <button type="submit" id="btnSendOtp" class="btn-submit">
+                        <span>Send 4-Digit Code</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
                 </div>
-                <button type="submit" class="btn-submit">
-                    <span>Send Reset Instructions</span>
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
+
+                <div id="step2_OtpBox" style="display: none;">
+                    <div class="input-box">
+                        <i class="fa-regular fa-shield-keyhole left-icon"></i>
+                        <input type="text" id="otpCodeInputBox" class="input-control" maxlength="4" placeholder="----" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fa-regular fa-lock left-icon"></i>
+                        <input type="password" id="newPassInput" class="input-control" placeholder="Enter New Password" required>
+                    </div>
+                    <button type="button" class="btn-submit" onclick="handleVerifyOTPAndReset()">
+                        <span>Verify Code & Reset Password</span>
+                        <i class="fa-solid fa-check-circle"></i>
+                    </button>
+                </div>
+
                 <div style="text-align: center; margin-top: 15px;">
                     <button type="button" onclick="switchAuthTab('login')" style="background: none; border: none; color: var(--accent); font-size: 13px; font-weight: 600; cursor: pointer;">
                         Back to Sign In
@@ -387,12 +354,6 @@
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
                 <span>Continue with Google</span>
             </button>
-
-            <div style="text-align: center; margin-top: 18px;">
-                <button type="button" onclick="closeAuthModal()" style="background: none; border: none; color: var(--text-muted); font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: underline;">
-                    Close & Continue Exploring Website
-                </button>
-            </div>
         </div>
     </div>
 
@@ -403,15 +364,17 @@
             projectId: "gbhss-portal",
             storageBucket: "gbhss-portal.firebasestorage.app",
             messagingSenderId: "1049905516160",
-            appId: "1:1049905516160:web:4d95fd39dd93ad54f8a065",
-            measurementId: "G-JLHJ518QLS"
+            appId: "1:1049905516160:web:4d95fd39dd93ad54f8a065"
         };
         
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
         let isUserAuthenticated = false;
+        let generatedOTP = null;
+        let targetUserEmail = "";
+
+        // Web3Forms Access Key Updated
+        const WEB3FORMS_KEY = "6f059bc2-ea56-4c4f-b6f1-aeeffca422d3"; 
 
         function evaluateStudyGroups() {
             const selectedClass = document.getElementById('classDropdown').value;
@@ -420,33 +383,24 @@
 
         function handleFormSubmissionAttempt(e) {
             e.preventDefault();
-            if (!isUserAuthenticated) {
-                openAuthModal('signup');
-            } else {
-                executeFinalSubmission();
-            }
+            if (!isUserAuthenticated) openAuthModal('signup');
+            else executeFinalSubmission();
         }
 
         function executeFinalSubmission() {
             document.getElementById('admissionForm').style.display = 'none';
             document.getElementById('successCard').style.display = 'block';
-            window.scrollTo({ top: 300, behavior: 'smooth' });
         }
 
         function resetPortalView() {
             document.getElementById('successCard').style.display = 'none';
             document.getElementById('admissionForm').style.display = 'block';
             document.getElementById('admissionForm').reset();
-            document.getElementById('groupWrapper').style.display = 'none';
         }
 
         function openAuthModal(mode) {
             document.getElementById('authModalOverlay').classList.add('active');
-            if(mode === 'login') {
-                switchAuthTab('login');
-            } else {
-                switchAuthTab('signup');
-            }
+            switchAuthTab(mode);
         }
 
         function closeAuthModal() {
@@ -454,29 +408,12 @@
         }
 
         function switchAuthTab(type) {
-            const loginBtn = document.querySelectorAll('.tab-btn')[0];
-            const signupBtn = document.querySelectorAll('.tab-btn')[1];
-            
-            document.getElementById('modalLoginForm').style.display = 'none';
-            document.getElementById('modalSignupForm').style.display = 'none';
+            document.getElementById('modalLoginForm').style.display = type === 'login' ? 'block' : 'none';
+            document.getElementById('modalSignupForm').style.display = type === 'signup' ? 'block' : 'none';
             document.getElementById('modalForgotForm').style.display = 'none';
             document.getElementById('tabSwitcherBox').style.display = 'flex';
             document.getElementById('socialAuthDivider').style.display = 'flex';
             document.getElementById('googleSsoBtn').style.display = 'flex';
-
-            if(type === 'login') {
-                loginBtn.classList.add('active');
-                signupBtn.classList.remove('active');
-                document.getElementById('modalLoginForm').style.display = 'block';
-                document.getElementById('modalTitle').innerText = 'Authentication Required';
-                document.getElementById('modalSub').innerText = 'Admission submit karne ke liye sign in karein.';
-            } else if(type === 'signup') {
-                signupBtn.classList.add('active');
-                loginBtn.classList.remove('active');
-                document.getElementById('modalSignupForm').style.display = 'block';
-                document.getElementById('modalTitle').innerText = 'Create Account';
-                document.getElementById('modalSub').innerText = 'Naya account banakar application submit karein.';
-            }
         }
 
         function switchToForgotMode() {
@@ -485,77 +422,100 @@
             document.getElementById('modalSignupForm').style.display = 'none';
             document.getElementById('socialAuthDivider').style.display = 'none';
             document.getElementById('googleSsoBtn').style.display = 'none';
-            
             document.getElementById('modalForgotForm').style.display = 'block';
-            document.getElementById('modalTitle').innerText = 'Reset Password';
-            document.getElementById('modalSub').innerText = 'Apna email enter karein taake password reset link bheja ja sake.';
+            
+            document.getElementById('step1_EmailBox').style.display = 'block';
+            document.getElementById('step2_OtpBox').style.display = 'none';
         }
 
-        function togglePasswordVisibility(fieldId, iconElement) {
-            const passwordField = document.getElementById(fieldId);
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                iconElement.classList.remove("fa-eye");
-                iconElement.classList.add("fa-eye-slash");
-            } else {
-                passwordField.type = "password";
-                iconElement.classList.remove("fa-eye-slash");
-                iconElement.classList.add("fa-eye");
+        // STEP 1: GENERATE & SEND AUTOMATIC 4-DIGIT OTP VIA WEB3FORMS
+        function handleSendOTP(e) {
+            e.preventDefault();
+            targetUserEmail = document.getElementById('forgotEmail').value;
+            
+            // Random 4 Digit OTP Code Generator
+            generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+
+            const btn = document.getElementById('btnSendOtp');
+            btn.innerText = "Sending Code...";
+
+            // Web3Forms API Call
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_KEY,
+                    email: targetUserEmail,
+                    subject: "GBHSS Paksinghar - Your Password Reset Verification Code",
+                    message: `Aapka Password Reset Verification Code hai: ${generatedOTP}. Yeh code kisi ke sath share na karein.`
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.innerText = "Send 4-Digit Code";
+                if (data.success) {
+                    alert("4-Digit Code aapke email par bhej diya gaya hai!");
+                    document.getElementById('step1_EmailBox').style.display = 'none';
+                    document.getElementById('step2_OtpBox').style.display = 'block';
+                } else {
+                    alert("Code bhejne mein masala hua: " + data.message);
+                }
+            })
+            .catch(err => {
+                btn.innerText = "Send 4-Digit Code";
+                alert("Error sending OTP: " + err.message);
+            });
+        }
+
+        // STEP 2: VERIFY OTP CODE & RESET PASSWORD
+        function handleVerifyOTPAndReset() {
+            const enteredOTP = document.getElementById('otpCodeInputBox').value.trim();
+            const newPassword = document.getElementById('newPassInput').value.trim();
+
+            if (enteredOTP !== generatedOTP) {
+                alert("Incorrect 4-Digit Code! Dobara try karein.");
+                return;
             }
+
+            if (newPassword.length < 6) {
+                alert("Password kam se kam 6 characters ka hona chahiye!");
+                return;
+            }
+
+            // OTP Verified! Ab Password Reset Link ya Authorization Bhejna
+            firebase.auth().sendPasswordResetEmail(targetUserEmail)
+                .then(() => {
+                    alert("OTP Code Verified Successfully! Aapko Direct Reset Link bhej diya gaya hai.");
+                    switchAuthTab('login');
+                })
+                .catch(err => alert("Error: " + err.message));
+        }
+
+        function togglePasswordVisibility(fieldId, icon) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === "password" ? "text" : "password";
+            icon.classList.toggle("fa-eye-slash");
         }
 
         function handleRealRegister(e) {
             e.preventDefault();
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('signupPass').value;
-
-            firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then(() => {
-                    isUserAuthenticated = true;
-                    alert("Account Successfully Created & Logged In!");
-                    closeAuthModal();
-                    executeFinalSubmission();
-                })
-                .catch((error) => alert("Error: " + error.message));
+            firebase.auth().createUserWithEmailAndPassword(document.getElementById('regEmail').value, document.getElementById('signupPass').value)
+                .then(() => { isUserAuthenticated = true; closeAuthModal(); executeFinalSubmission(); })
+                .catch(err => alert(err.message));
         }
 
         function handleRealLogin(e) {
             e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPass').value;
-
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    isUserAuthenticated = true;
-                    alert("Login Successful!");
-                    closeAuthModal();
-                    executeFinalSubmission();
-                })
-                .catch((error) => alert("Login Failed: " + error.message));
-        }
-
-        function handleForgotPassword(e) {
-            e.preventDefault();
-            const email = document.getElementById('forgotEmail').value;
-
-            firebase.auth().sendPasswordResetEmail(email)
-                .then(() => {
-                    alert("Password reset email sent successfully! Please check your inbox.");
-                    switchAuthTab('login');
-                })
-                .catch((error) => alert("Error: " + error.message));
+            firebase.auth().signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
+                .then(() => { isUserAuthenticated = true; closeAuthModal(); executeFinalSubmission(); })
+                .catch(err => alert(err.message));
         }
 
         function handleGoogleLogin(e) {
             e.preventDefault();
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider)
-                .then(() => {
-                    isUserAuthenticated = true;
-                    closeAuthModal();
-                    executeFinalSubmission();
-                })
-                .catch((error) => alert("Google Sign-In Error: " + error.message));
+            firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+                .then(() => { isUserAuthenticated = true; closeAuthModal(); executeFinalSubmission(); })
+                .catch(err => alert(err.message));
         }
     </script>
 </body>
